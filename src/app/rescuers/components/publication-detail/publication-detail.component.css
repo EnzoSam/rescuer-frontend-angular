@@ -1,0 +1,26 @@
+.publication-detail-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.publication
+{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.user-publication-detail{
+
+    display: flex;
+    width: 200px;
+}
+
+.publication-image
+{
+    object-fit: cover;
+    width: 90%;
+    max-height: 60%;
+}

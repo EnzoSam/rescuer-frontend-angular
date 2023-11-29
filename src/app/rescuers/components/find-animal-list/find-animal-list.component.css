@@ -1,0 +1,25 @@
+.publications-list-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.publications-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.publication-header
+{
+    display: flex;
+    flex-direction: row;
+    padding-right: 55px;
+}
+
+.list-title
+{
+    flex-grow: 1;
+}

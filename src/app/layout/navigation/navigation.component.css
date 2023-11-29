@@ -1,0 +1,22 @@
+nav{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    
+}
+
+mat-toolbar
+{
+    gap: 10px;
+}
+
+.app-title
+{
+    flex-grow: 1;
+}

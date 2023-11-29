@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+html, body{
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+    box-sizing: border-box;
+}
+
+
+.component-with-nav-container
+{
+    min-height: calc(100vh - 80px);
+    padding-top: 80px;
+}
+
+.margin-0{
+    margin: 0;
+}
+
+.padding-0{
+    margin: 0;
+}
+

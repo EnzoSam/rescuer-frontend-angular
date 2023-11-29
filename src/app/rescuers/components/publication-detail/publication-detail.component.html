@@ -1,0 +1,14 @@
+<div *ngIf="publication" class="publication-detail-container">
+    <div class="publication">
+        <h2>
+            {{publication.title}}
+        </h2>
+        <img class="publication-image" [src]="publication.image" [alt]="publication.title">
+        <p>
+            {{publication.description}}
+        </p>
+    </div>
+    <div class="user-publication-detail">
+        user
+    </div>
+</div>
