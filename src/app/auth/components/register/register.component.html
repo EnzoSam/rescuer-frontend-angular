@@ -1,26 +1,49 @@
 <div class="register-container">
-    <form action="" (ngSubmit)="submit($event)">
+  <form [formGroup]="form" (ngSubmit)="submit($event)">
     <mat-card>
-        <mat-card-header>
-            <mat-card-title>Registrar</mat-card-title>
-            <mat-card-subtitle>Ingresa tu email para iniciar el registro</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
+      <mat-card-header>
+        <mat-card-title>Registrar</mat-card-title>
+        <mat-card-subtitle>Ingresa tu email para iniciar el registro</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
 
-            <mat-form-field  appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="email@example.com" [formControl]="email" required>
-                @if (email.invalid) {
-                  <mat-error>{{getErrorMessage()}}</mat-error>
-                }
-              </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="email@example.com" formControlName="email" required>
+          @if (email && email.invalid && (email.dirty || email.touched)) {
+          <mat-error *ngIf="email.errors?.['required']">Requerido</mat-error>
+          <mat-error *ngIf="email.errors?.['email']">Invalido</mat-error>
+          }
+        </mat-form-field>
 
-              <button mat-raised-button color="primary">Registrar</button>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="name && name.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
 
-        </mat-card-content>
-        <mat-card-actions>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastName" required>
+          <mat-error *ngIf="lastName && lastName.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
 
-        </mat-card-actions>
+        <mat-form-field appearance="fill">
+          <mat-label>Ingresa tu password</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="password && password.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
+
+        <button  [disabled]="!form.valid" mat-raised-button color="primary">Registrar</button>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
     </mat-card>
-</form>
+  </form>
 </div>

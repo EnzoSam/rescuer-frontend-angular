@@ -6,6 +6,7 @@
         </mat-card-header>
         <mat-card-content>
 
+          <form action="" (ngSubmit)="submit($event)">
             <mat-form-field  appearance="fill">
                 <mat-label>Ingresa tu email</mat-label>
                 <input matInput placeholder="email@example.com" [formControl]="email" required>
@@ -16,7 +17,7 @@
 
               <mat-form-field  appearance="fill">
                 <mat-label>Ingresa tu password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
+                <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" 
                 [attr.aria-label]="'Ocultar password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -24,7 +25,8 @@
               </mat-form-field>
 
               <button mat-raised-button color="primary">Iniciar sesión</button>
-
+              <button mat-button routerLink="../register" color="primary">Registrarme</button>
+            </form>
         </mat-card-content>
         <mat-card-actions>
 

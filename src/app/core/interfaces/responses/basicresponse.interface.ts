@@ -1,4 +1,4 @@
-export interface IInitRegisterResponse
+export interface IBasicResponse
 {
     statusCode:number,
     message:string

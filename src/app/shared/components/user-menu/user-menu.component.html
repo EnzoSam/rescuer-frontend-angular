@@ -1,0 +1,19 @@
+<button routerLink="./auth/login" *ngIf="!isAuthenticated()" mat-menu-item>
+    <mat-icon>login</mat-icon>
+    <span></span>
+</button>
+
+<button *ngIf="isAuthenticated()"  mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Perfil</span>
+      </button>
+    <button  [routerLink]="['./auth/logout', '1']" mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesion</span>
+    </button>
+
+  </mat-menu>
