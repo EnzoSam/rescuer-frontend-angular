@@ -94,4 +94,35 @@ export class AuthService extends BaseNoAuthService {
     localStorage.removeItem('auth');
     this._iuService.clearAuth();
   }
+
+  requestResetPassword(email: string): Promise<IResult> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.post<IResult>(this.getBaseUrlNameSpace() + "request-reset-password",{})
+        .subscribe(response => {
+          resolve(response);
+        },
+          error => {
+            reject(error)
+          }
+        );
+    });
+  }
+
+  changePassword(email: string, token:string, newPassword:string): Promise<IResult> {
+    return new Promise((resolve, reject) => {
+
+      let req = {
+        email, token, newPassword
+      };
+
+      this._httpClient.post<IResult>(this.getBaseUrlNameSpace() + "change-password",req)
+        .subscribe(response => {
+          resolve(response);
+        },
+          error => {
+            reject(error)
+          }
+        );
+    });
+  }  
 }
