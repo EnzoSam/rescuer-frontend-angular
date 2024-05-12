@@ -1,0 +1,29 @@
+<mat-drawer-container class="component-with-nav-container" autosize>
+    <mat-drawer class="dashboard-menu" #drawer mode="side">
+        <mat-icon #btnClose autosize class="close-sidebar" 
+        type="button" mat-button (click)="drawer.toggle()">
+            close
+        </mat-icon>
+
+        <button mat-menu-item [routerLink]="['./' + paths.atributes]">
+            <mat-icon>workspaces</mat-icon>
+            <span>Atributos</span>
+        </button>
+        <button mat-menu-item [routerLink]="['./dashboard']">
+            <mat-icon>import_contacts</mat-icon>
+            <span>Datos utiles</span>
+        </button>
+        <button  mat-menu-item>
+            <mat-icon>group</mat-icon>
+            <span>Usuarios</span>
+        </button>
+    </mat-drawer>
+
+    <div>       
+        <mat-icon #btnOpen type="button" mat-button (click)="drawer.toggle()">
+            menu
+        </mat-icon>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-drawer-container>

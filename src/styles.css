@@ -13,8 +13,8 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .component-with-nav-container
 {
-    min-height: calc(100vh - 80px);
-    padding-top: 80px;
+    min-height: calc(100vh - 65px);
+    padding-top: 65px;
 }
 
 .margin-0{

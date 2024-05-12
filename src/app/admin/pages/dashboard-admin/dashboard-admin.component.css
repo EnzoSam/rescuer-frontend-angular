@@ -1,0 +1,20 @@
+.dashboard-menu
+{
+    min-width: 20%;
+}
+
+mat-drawer-container{
+    height: 100%;
+}
+
+.close-sidebar
+{
+    margin-left: auto;
+    display: block;
+}
+
+.component-with-nav-container
+{
+    padding-top: 0px;
+}
+

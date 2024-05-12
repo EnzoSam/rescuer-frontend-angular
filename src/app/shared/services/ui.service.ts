@@ -10,8 +10,9 @@ export class UiService {
 
   private siteStatus: any = new BehaviorSubject<IStatus>({} as IStatus);
   private accountStauts: any = new BehaviorSubject<IAuthentication>({} as IAuthentication);
-  
-  constructor() { }
+  constructor() {
+    this.loadAuthentication();
+   }
 
   onSiteStatusChanged(): Observable<IStatus>
   {
@@ -48,9 +49,9 @@ export class UiService {
      }
   }
 
-  getAuthentication():IAuthentication | undefined
+  getAuthentication():IAuthentication
   {
-    return this.accountStauts.next() as IAuthentication;
+    return this.accountStauts.value as IAuthentication;
   }
   
   isAuthenticated():boolean

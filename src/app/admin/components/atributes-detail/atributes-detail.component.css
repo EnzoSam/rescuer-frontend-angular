@@ -1,0 +1,21 @@
+.atribute-container{
+ 
+    display:  flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 80px);
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;    
+}
+
+mat-card
+{
+    margin-top: -200px;
+    width: 400px;
+}
+
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+}

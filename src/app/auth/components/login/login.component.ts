@@ -14,35 +14,32 @@ import { UiService } from '../../../shared/services/ui.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,RouterLink,MatCardModule, MatFormFieldModule, 
+  imports: [CommonModule, RouterLink, MatCardModule, MatFormFieldModule,
     MatInputModule, FormsModule, ReactiveFormsModule, MatIconModule, MatButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
 
-  login:ILogin;
+  login: ILogin;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
   hide = true;
 
-  constructor(private _authService:AuthService,
-    private _router:Router,
-    private _uiService:UiService,
-    private _activateRoute:ActivatedRoute)
-  {
+  constructor(private _authService: AuthService,
+    private _router: Router,
+    private _uiService: UiService,
+    private _activateRoute: ActivatedRoute) {
     this.login = this._authService.newLogin();
   }
 
   ngOnInit(): void {
-    
-    if(this._activateRoute.snapshot.paramMap.has('out'))
-    {
+
+    if (this._activateRoute.snapshot.paramMap.has('out')) {
       this._activateRoute.params.subscribe(params => {
-              
+
         const outP = params['out'];
-        if(outP && outP === '1')
-        {
+        if (outP && outP === '1') {
           this._authService.logOut();
           this._router.navigate(['../home']);
         }
@@ -63,13 +60,16 @@ export class LoginComponent implements OnInit {
     this.login.email = this.email.value + '';
     this.login.password = this.password.value + '';
     this._authService.login(this.login).then(response => {
-            
+
       this._authService.rememberUser(this.login.email, response.token);
       this._router.navigate(['../home']);
-      
+
     }).catch(error => {
-      console.log(error);
-      this._uiService.setNewErrorStatus(error.message, error);
+
+      if (error.status === 401)
+        this._uiService.setNewErrorStatus(error.error.message, error);
+      else 
+        this._uiService.setNewErrorStatus(error.message, error);
     });
   }
 }
