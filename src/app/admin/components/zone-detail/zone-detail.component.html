@@ -1,0 +1,42 @@
+<div class="zone-container">
+    <form [formGroup]="form" (ngSubmit)="submit($event)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Zona</mat-card-title>
+          <mat-card-subtitle>Ingrese los datos de la zona</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Codigo</mat-label>
+            <input matInput formControlName="code">
+            <mat-error *ngIf="code && code.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="name && name.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo</mat-label>
+            <select matNativeControl formControlName="zoneType">
+                <option value="" selected></option>
+                <option [value]="zonesTypes.Country">{{zonesTypes.Country}}</option>
+                <option [value]="zonesTypes.Province" >{{zonesTypes.Province}}</option>
+                <option [value]="zonesTypes.Town" >{{zonesTypes.Town}}</option>
+                <option [value]="zonesTypes.Neighborhood" >{{zonesTypes.Neighborhood}}</option>
+              </select>
+            <mat-error *ngIf="zoneType && zoneType.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>          
+  
+          <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
+  
+        </mat-card-content>
+        <mat-card-actions>
+  
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
