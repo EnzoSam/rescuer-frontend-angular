@@ -10,13 +10,10 @@ import { ZoneDetailComponent } from './components/zone-detail/zone-detail.compon
 
 export const AdminRoutes: Routes = [
   {
-    path: '', redirectTo: AdminPaths.dashboard + '/' +AdminPaths.atributes, pathMatch: 'full'
-  },
-  {
-    path: AdminPaths.dashboard, component: DashboardAdminComponent,
+    path:'', component: DashboardAdminComponent,
     children: [
       { path: AdminPaths.atributes, component: AtributesListComponent },
-      { path: AdminPaths.atributeDetail + "/:" + RouterPathParams.id, component: AtributesDetailComponent },
+      { path: AdminPaths.atributeDetail + '/:' + RouterPathParams.id, component: AtributesDetailComponent },
       { path: AdminPaths.atributeDetail, component: AtributesDetailComponent },
       { path: AdminPaths.zone, component: ZonesComponent },
       { path: AdminPaths.zoneDetail, component: ZoneDetailComponent }
