@@ -1,8 +1,9 @@
 <div class="container">
 
-    <h1>Zonas</h1>
+    <h1>{{parentZone? 'Zonas de ' + parentZone.name: 'Zonas'}}</h1>
 
-    <button class="new-btn" [routerLink]="'../' + paths.zoneDetail"  mat-raised-button color="primary">Nuevo</button>
+    <button *ngIf="!parentZone" class="new-btn" [routerLink]="'../' + paths.zoneDetail"  mat-raised-button color="primary">Nuevo</button>
+    <button *ngIf="parentZone" class="new-btn" [routerLink]="['../../' + paths.zoneChildDetail, parentZone.id]" mat-raised-button color="primary">Nuevo</button>
     <table mat-table [dataSource]="zones" multiTemplateDataRows class="mat-elevation-z8">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -15,8 +16,9 @@
                 <div class="example-element-detail"
                     [@detailExpand]="zoneIter == selectedZone ? 'expanded' : 'collapsed'">
                     <div class="row-actions">
-                        <button mat-raised-button [routerLink]="['../' + paths.zoneDetail, zoneIter.id]">Ediar</button>
+                        <button mat-raised-button [routerLink]="['../' + paths.zoneDetail, zoneIter.id]">Ediar</button>                        
                         <button (click)="delete()" mat-raised-button>Eliminar</button>
+                        <button mat-raised-button [routerLink]="['../' + paths.zone, zoneIter.id]">{{getChildTypeName()}}</button>
                     </div>
                 </div>
             </td>

@@ -1,4 +1,4 @@
-<div class="zone-container">
+<div *ngIf="form" class="zone-container">
     <form [formGroup]="form" (ngSubmit)="submit($event)">
       <mat-card>
         <mat-card-header>
@@ -22,11 +22,10 @@
           <mat-form-field appearance="fill">
             <mat-label>Tipo</mat-label>
             <select matNativeControl formControlName="zoneType">
-                <option value="" selected></option>
-                <option [value]="zonesTypes.Country">{{zonesTypes.Country}}</option>
-                <option [value]="zonesTypes.Province" >{{zonesTypes.Province}}</option>
-                <option [value]="zonesTypes.Town" >{{zonesTypes.Town}}</option>
-                <option [value]="zonesTypes.Neighborhood" >{{zonesTypes.Neighborhood}}</option>
+                <option [ngValue]="zonesTypes.Country">{{zonesTypes.Country}}</option>
+                <option [ngValue]="zonesTypes.Province" >{{zonesTypes.Province}}</option>
+                <option [ngValue]="zonesTypes.Town" >{{zonesTypes.Town}}</option>
+                <option [ngValue]="zonesTypes.Neighborhood" >{{zonesTypes.Neighborhood}}</option>
               </select>
             <mat-error *ngIf="zoneType && zoneType.errors?.['required']">Requerido</mat-error>
           </mat-form-field>          

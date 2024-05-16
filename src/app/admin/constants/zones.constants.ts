@@ -3,5 +3,6 @@ export const ZoneType =
     Country:"country",
     Province:"province",
     Town:"town",
-    Neighborhood:"neighborhood"
+    Neighborhood:"neighborhood",
+    Location:"location"
 }

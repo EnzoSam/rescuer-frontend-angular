@@ -3,5 +3,5 @@ export interface IZone {
     name: string
     code: string
     zoneType:string,
-    idMasterZone?:any
+    parentZoneId?:any
   }
