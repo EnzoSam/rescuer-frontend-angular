@@ -19,6 +19,11 @@
             <mat-error *ngIf="group && group.errors?.['required']">Requerido</mat-error>
           </mat-form-field>
   
+          <app-upload-file [urlBase]="urlUploads" 
+          (fileUploaded)="onFileUploaded($event)"></app-upload-file>
+
+          <img *ngIf="image && image !== ''" src={{getUrlImage()}} alt="Imagen atributo">
+
           <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
   
         </mat-card-content>

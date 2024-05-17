@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Backend } from '../../shared/constants/api.constat';
+import { Backend } from '../../shared/constants/api.constant';
 import { HttpClient } from '@angular/common/http';
 import { BaseServiceService } from './baseservice.service';
 

@@ -71,7 +71,7 @@ export class ZonesComponent implements OnInit {
       });
     }
     else {
-      this._zoneService.getAll()
+      this._zoneService.getRoots()
         .then((response: IBasicResponse) => {
           this.zones = response.data;
         }).catch((response: IBasicResponse) => {

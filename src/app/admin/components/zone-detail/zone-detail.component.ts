@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ZoneType } from '../../constants/zones.constants';
-import { AdminPaths } from '../../constants/adminPaths.constant';
+import { AdminParamPaths, AdminPaths } from '../../constants/adminPaths.constant';
 import { RouterPathParams } from '../../../shared/constants/routesPaths.constant';
 
 @Component({
@@ -29,20 +29,44 @@ export class ZoneDetailComponent implements OnInit {
   zone: IZone;
   zonesTypes = ZoneType;
   parentZone?:IZone;
+  zoneType:string;
 
   constructor(private _zoneService: ZoneService,
     private _router: Router,
     private _activateRoute: ActivatedRoute,
     private _uiService: UiService) {
     this.zone = this._zoneService.new();
+    this.zoneType = ZoneType.Country;
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       code: new FormControl(''),
-      zoneType: new FormControl('', [Validators.required]),
+      zoneType: new FormControl({value:'', disabled:true}, [Validators.required]),
     });
   }
   ngOnInit(): void {
 
+    if (this._activateRoute.snapshot.paramMap.has(AdminParamPaths.parentId)) {
+      this._activateRoute.params.subscribe(params => {
+        let idParam = params[AdminParamPaths.parentId];  
+        console.log(idParam)      
+        if(idParam && idParam != '')
+        {
+          this._zoneService.getById(idParam)
+          .then((response:IBasicResponse)=>
+          {
+            this.parentZone = response.data;
+            this.zoneType = this._zoneService.getChildType(this.parentZone?.zoneType || '');
+            this.zone.parentZoneId = this.parentZone?.id;
+            this.form.patchValue({
+              zoneType: this.zoneType
+              });
+          }).catch(error => {
+            this._uiService.setNewErrorStatus(error.message, error);
+          });
+        }
+      });
+    }
+    
     if (this._activateRoute.snapshot.paramMap.has(RouterPathParams.id)) {
       this._activateRoute.params.subscribe(params => {
         const idParam = params[RouterPathParams.id];        
@@ -63,8 +87,7 @@ export class ZoneDetailComponent implements OnInit {
       console.log(response.data)
       this.form.patchValue({
         name: this.zone.name,
-        code: this.zone.code,
-        zoneType: this.zoneType
+        code: this.zone.code
         });
 
     }).catch(error => {
@@ -74,15 +97,14 @@ export class ZoneDetailComponent implements OnInit {
 
   get name() { return this.form.get('name'); }
   get code() { return this.form.get('code'); }
-  get zoneType() { return this.form.get('zoneType'); }
 
   submit(e: any): void {
     e.preventDefault();
 
     this.zone.name = this.form.value.name;
     this.zone.code = this.form.value.code;
-    this.zone.zoneType = this.form.value.zoneType;
-    console.log(this.zone);
+    this.zone.zoneType = this.zoneType;      
+
     this._zoneService.createOrUpdeate(this.zone)
       .then((response: IBasicResponse) => {
 

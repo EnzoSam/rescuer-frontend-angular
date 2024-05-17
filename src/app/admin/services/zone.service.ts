@@ -40,6 +40,20 @@ export class ZoneService extends BaseServiceService {
     });
   }
 
+  getRoots(): Promise<IBasicResponse> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.get<IBasicResponse>
+      (this.getBaseUrlNameSpace() + 'roots')
+        .subscribe((response:IBasicResponse) => {
+          resolve(response);            
+        },
+          error => {
+            reject({ statusCode: 500, message: error })
+          }
+        );
+    });
+  }
+
   update(zone:IZone): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.put<IBasicResponse>

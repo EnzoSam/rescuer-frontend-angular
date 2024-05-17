@@ -2,7 +2,8 @@
     <form [formGroup]="form" (ngSubmit)="submit($event)">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>Zona</mat-card-title>
+          <mat-card-title *ngIf="!parentZone">Zona</mat-card-title>
+          <mat-card-title *ngIf="parentZone">{{'Zona de ' + parentZone.name}}</mat-card-title>
           <mat-card-subtitle>Ingrese los datos de la zona</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
@@ -21,13 +22,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Tipo</mat-label>
-            <select matNativeControl formControlName="zoneType">
-                <option [ngValue]="zonesTypes.Country">{{zonesTypes.Country}}</option>
-                <option [ngValue]="zonesTypes.Province" >{{zonesTypes.Province}}</option>
-                <option [ngValue]="zonesTypes.Town" >{{zonesTypes.Town}}</option>
-                <option [ngValue]="zonesTypes.Neighborhood" >{{zonesTypes.Neighborhood}}</option>
-              </select>
-            <mat-error *ngIf="zoneType && zoneType.errors?.['required']">Requerido</mat-error>
+            <input matInput formControlName="zoneType">
           </mat-form-field>          
   
           <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
