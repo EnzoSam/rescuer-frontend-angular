@@ -54,6 +54,15 @@ export class ZoneService extends BaseServiceService {
     });
   }
 
+  createOrUpdeate(zone:IZone): Promise<IBasicResponse> {
+
+    console.log(zone)
+    if(zone.id)
+      return this.update(zone);
+    else
+      return this.create(zone);
+  } 
+
   update(zone:IZone): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.put<IBasicResponse>
@@ -83,15 +92,6 @@ export class ZoneService extends BaseServiceService {
         );
     });
   }  
-
-  createOrUpdeate(zone:IZone): Promise<IBasicResponse> {
-
-    console.log(zone)
-    if(zone.id)
-      return this.update(zone);
-    else
-      return this.create(zone);
-  } 
 
   delete(zone:IZone): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {

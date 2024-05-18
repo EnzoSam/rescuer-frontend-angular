@@ -30,7 +30,7 @@ export class AtributesListComponent implements OnInit {
 
   atributes:IAtribute[];
   displayedColumns: string[] = ['name', 'group'];
-  expandedElement: any | null;
+  selectedAtribute?: IAtribute;
   paths = AdminPaths;
 
   constructor(private _atributeServices:AtributeService,
@@ -55,7 +55,16 @@ export class AtributesListComponent implements OnInit {
 
   }
 
-
+  delete() {
+    if (this.selectedAtribute) {
+      this._atributeServices.delete(this.selectedAtribute)
+        .then((response: IBasicResponse) => {
+          this.load();
+        }).catch((response: IBasicResponse) => {
+          this._uiService.setNewErrorStatus(response.message, response);
+        })
+    }
+  }
 }
 
 

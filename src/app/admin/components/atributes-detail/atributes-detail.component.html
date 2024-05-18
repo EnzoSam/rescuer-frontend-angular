@@ -22,7 +22,7 @@
           <app-upload-file [urlBase]="urlUploads" 
           (fileUploaded)="onFileUploaded($event)"></app-upload-file>
 
-          <img *ngIf="image && image !== ''" src={{getUrlImage()}} alt="Imagen atributo">
+          <img class="miniature-image" *ngIf="image && image !== ''" src={{getUrlImage()}} alt="Imagen atributo">
 
           <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
   
