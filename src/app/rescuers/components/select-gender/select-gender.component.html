@@ -1,0 +1,9 @@
+<div class="select-gender-container">
+    @for (g of genders; track g.id) {
+    <mat-card class="atribute-for-create" (click)="onCardToogle(g)">
+        <img mat-card-image [src]="getUrlImage(g.image)">
+        <mat-card-title>{{g.name}}</mat-card-title>
+    
+    </mat-card>
+    }
+</div>

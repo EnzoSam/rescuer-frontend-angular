@@ -1,47 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseServiceService } from '../../core/service/baseservice.service';
-import { IAtribute } from '../interfaces/iatribute.interface';
 import { IBasicResponse } from "../../core/interfaces/responses/basicresponse.interface";
+import { Animal } from '../models/animal.model';
+import { BaseAuthService } from '../../core/service/baseAuth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AtributeService extends BaseServiceService {
+export class AnimalService extends BaseAuthService {
 
   constructor(protected override _httpClient: HttpClient) {
     super(_httpClient);
-    this.nameSpace = 'atributes';
+    this.nameSpace = 'animals';
   }
 
-  new():IAtribute
+  new():Animal
   {
-    return {
-      id:undefined,
-        name:'',
-        group:'',
-        image:''
-    }
+    return new Animal(undefined,'');
   }
 
   getAll(): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<IBasicResponse>
       (this.getBaseUrlNameSpace())
-        .subscribe((response:IBasicResponse) => {
-          resolve(response);            
-        },
-          error => {
-            reject({ statusCode: 500, message: error })
-          }
-        );
-    });
-  }
-
-  getByType(type:string): Promise<IBasicResponse> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get<IBasicResponse>
-      (this.getBaseUrlNameSpace() + 'group/' + type)
         .subscribe((response:IBasicResponse) => {
           resolve(response);            
         },
@@ -66,19 +48,19 @@ export class AtributeService extends BaseServiceService {
     });
   }  
     
-  createOrUpdeate(atribute:IAtribute): Promise<IBasicResponse> {
+  createOrUpdeate(animal:Animal): Promise<IBasicResponse> {
 
-    console.log(atribute)
-    if(atribute.id)
-      return this.update(atribute);
+    console.log(animal)
+    if(animal.id)
+      return this.update(animal);
     else
-      return this.create(atribute);
+      return this.create(animal);
   } 
 
-  update(atribute:IAtribute): Promise<IBasicResponse> {
+  update(animal:Animal): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.put<IBasicResponse>
-      (this.getBaseUrlNameSpace(), atribute)
+      (this.getBaseUrlNameSpace(), animal)
         .subscribe((response:IBasicResponse) => {
           console.log(response);
           resolve(response);
@@ -90,10 +72,10 @@ export class AtributeService extends BaseServiceService {
     });
   }
 
-  create(atribute:IAtribute): Promise<IBasicResponse> {
+  create(animal:Animal): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.post<IBasicResponse>
-      (this.getBaseUrlNameSpace(), atribute)
+      (this.getBaseUrlNameSpace(), animal)
         .subscribe((response:IBasicResponse) => {
           resolve(response);
         },
@@ -104,10 +86,10 @@ export class AtributeService extends BaseServiceService {
     });
   }  
 
-  delete(atribute:IAtribute): Promise<IBasicResponse> {
+  delete(animal:Animal): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.delete<IBasicResponse>
-      (this.getBaseUrlNameSpace() + '' + atribute.id)
+      (this.getBaseUrlNameSpace() + '' + animal.id)
         .subscribe((response:IBasicResponse) => {
           resolve(response);
         },

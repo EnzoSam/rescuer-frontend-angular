@@ -1,0 +1,32 @@
+<mat-stepper orientation="vertical" #stepper>
+    <mat-step label="Seleccione el tipo de animal">
+        <app-select-type 
+        (onTypeToogle)="onTypeSelected($event)"
+        (click)="stepper.next()"></app-select-type>
+    </mat-step>
+    
+    <mat-step label="Seleccione la edad del animal">
+      <app-select-age (onTypeToogle)="onAgeSelected($event)"
+      (click)="stepper.next()"></app-select-age>
+    </mat-step>
+    <mat-step label="Seleccione el género">
+      <app-select-gender  (onTypeToogle)="onGenederSelected($event)"
+      (click)="stepper.next()"></app-select-gender>
+    </mat-step>
+    <mat-step label="Ingrese el nombre del animal">
+      <app-select-name 
+      (onNameSelected)="onNameSelected($event);stepper.next();"
+      ></app-select-name>
+    </mat-step>
+    <mat-step label="Agregue una imagen del animal">
+      <app-select-image
+      (onImageSelected)="onImageSelected($event);stepper.next();"
+      ></app-select-image>
+    </mat-step>
+    <mat-step label="Finalizar">
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button (click)="onSubmit()">Finalizar</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

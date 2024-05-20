@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IPublication } from '../../interfaces/publication.interface';
+import { IPost } from '../../interfaces/post.interface';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class FindPublicationCardComponent {
 
-  @Input() publication?:IPublication;
+  @Input() publication?:IPost;
 
   constructor()
   {

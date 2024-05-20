@@ -1,12 +1,12 @@
 <mat-card routerLink="../detail" *ngIf="publication" class="publication-card-container">
   <mat-card-header>
-    <mat-card-title>{{publication.title}}</mat-card-title>
+    <mat-card-title>{{publication.getTitle()}}</mat-card-title>
     <mat-card-subtitle>Perro</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="publication.image" alt="publication.title">
+  <img mat-card-image [src]="publication.getImage()" alt="publication.title">
   <mat-card-content>
     <p>
-      {{publication.description}}
+      {{publication.getDescription()}}
     </p>
   </mat-card-content>
   <mat-card-actions>

@@ -1,0 +1,15 @@
+.select-age-container
+{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.atribute-for-create{
+    min-width: 200px;
+}
+
+mat-card
+{
+    cursor: pointer;
+}

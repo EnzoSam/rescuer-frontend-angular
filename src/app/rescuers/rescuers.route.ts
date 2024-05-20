@@ -1,7 +1,8 @@
 import { Routes } from "@angular/router";
 import { FindAnimalComponent } from "./components/find-animal/find-animal.component";
 import { PublicationDetailComponent } from "./components/publication-detail/publication-detail.component";
-import { PublicationCreateComponent } from "./components/publication-create/publication-create.component";
+import { CreateAnimalComponent } from "./components/create-animal/create-animal.component";
+import { RescuersPaths } from "./constants/rescuersPaths.constant";
 
 export const RescuersRoutes: Routes = [
     {
@@ -9,7 +10,8 @@ export const RescuersRoutes: Routes = [
     },
     { path: 'find', component: FindAnimalComponent },
     { path: 'detail', component: PublicationDetailComponent },
-    { path: 'create', component: PublicationCreateComponent },
+    { path: RescuersPaths.create, component: CreateAnimalComponent },
+    
   ];
   
   

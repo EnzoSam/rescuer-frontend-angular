@@ -1,11 +1,11 @@
 <div *ngIf="publication" class="publication-detail-container">
     <div class="publication">
         <h2>
-            {{publication.title}}
+            {{publication.getTitle()}}
         </h2>
-        <img class="publication-image" [src]="publication.image" [alt]="publication.title">
+        <img class="publication-image" [src]="publication.getImage()" [alt]="publication.getTitle()">
         <p>
-            {{publication.description}}
+            {{publication.getDescription()}}
         </p>
     </div>
     <div class="user-publication-detail">

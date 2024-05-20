@@ -1,0 +1,9 @@
+<div class="select-age-container">
+    @for (a of ages; track a.id) {
+    <mat-card class="atribute-for-create" (click)="onCardToogle(a)">
+        <img mat-card-image [src]="getUrlImage(a.image)">
+        <mat-card-title>{{a.name}}</mat-card-title>
+    
+    </mat-card>
+    }
+</div>

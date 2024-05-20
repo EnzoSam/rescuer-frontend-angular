@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IPublication } from '../../interfaces/publication.interface';
+import { IPost } from '../../interfaces/post.interface';
 
 @Component({
   selector: 'app-publication-detail',
@@ -11,13 +11,15 @@ import { IPublication } from '../../interfaces/publication.interface';
 })
 export class PublicationDetailComponent {
 
-  publication?: IPublication;
+  publication?: IPost;
 
   constructor() {
+
+    /*
     this.publication = { 
       id: 1, 
       title: 'Publicacion 1', 
       description: 'Descripcion de la publicacion 1', 
-      image: 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg' };
+      image: 'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg' };*/
   }
 }
