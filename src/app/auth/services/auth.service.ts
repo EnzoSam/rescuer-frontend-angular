@@ -8,6 +8,7 @@ import { ILoginResponse } from '../interfaces/loginResponse.interface';
 import { IResult } from '../../shared/interfaces/basicResult.interface';
 import { IAuthentication } from '../../shared/interfaces/authentication.interface';
 import { UiService } from '../../shared/services/ui.service';
+import { IBasicResponse } from '../../core/interfaces/responses/basicresponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,8 @@ export class AuthService extends BaseNoAuthService {
 
   initRegister(register: IRegister): Promise<IInitRegisterResponse> {
     return new Promise((resolve, reject) => {
-      this._httpClient.post<IInitRegisterResponse>(this.getBaseUrlNameSpace() + "register", register)
+      this._httpClient.post<IInitRegisterResponse>
+      (this.getBaseUrlNameSpace() + "no-auth/register", register)
         .subscribe(response => {
           resolve(response);
         },
@@ -54,7 +56,8 @@ export class AuthService extends BaseNoAuthService {
 
   login(login: ILogin): Promise<ILoginResponse> {
     return new Promise((resolve, reject) => {
-      this._httpClient.post<ILoginResponse>(this.getBaseUrlNameSpace() + "login", login)
+      this._httpClient.post<ILoginResponse>
+      (this.getBaseUrlNameSpace() + "no-auth/login", login)
         .subscribe(response => {
           resolve(response);
         },
@@ -68,7 +71,8 @@ export class AuthService extends BaseNoAuthService {
   validateMail(email: string, token: string): Promise<IResult> {
     return new Promise((resolve, reject) => {
       let validation = { email, token };
-      this._httpClient.post<IResult>(this.getBaseUrlNameSpace() + "confirm-email", validation)
+      this._httpClient.post<IResult>
+      (this.getBaseUrlNameSpace() + "no-auth/confirm-email", validation)
         .subscribe(response => {
           resolve(response);
         },
@@ -85,6 +89,7 @@ export class AuthService extends BaseNoAuthService {
         userName,
         token
       };
+      console.log(auth);
       localStorage.setItem('auth', JSON.stringify(auth));
       this._iuService.loadAuthentication();
   }
@@ -97,7 +102,8 @@ export class AuthService extends BaseNoAuthService {
 
   requestResetPassword(email: string): Promise<IResult> {
     return new Promise((resolve, reject) => {
-      this._httpClient.post<IResult>(this.getBaseUrlNameSpace() + "request-reset-password",{})
+      this._httpClient.post<IResult>
+      (this.getBaseUrlNameSpace() + "no-auth/request-reset-password",{})
         .subscribe(response => {
           resolve(response);
         },
@@ -115,7 +121,8 @@ export class AuthService extends BaseNoAuthService {
         email, token, newPassword
       };
 
-      this._httpClient.post<IResult>(this.getBaseUrlNameSpace() + "change-password",req)
+      this._httpClient.post<IResult>
+      (this.getBaseUrlNameSpace() + "no-auth/change-password",req)
         .subscribe(response => {
           resolve(response);
         },
@@ -125,4 +132,18 @@ export class AuthService extends BaseNoAuthService {
         );
     });
   }  
+
+  getById(_id:any): Promise<IBasicResponse> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.get<IBasicResponse>
+      (this.getBaseUrlNameSpace() + '' + _id)
+        .subscribe((response:IBasicResponse) => {
+          resolve(response);
+        },
+          error => {
+            reject({ statusCode: 500, message: error })
+          }
+        );
+    });
+  }    
 }

@@ -1,5 +1,5 @@
 export interface IAuthentication
 {
-    userName:string;
-    token:string;
+    userName:string
+    token:string
 }

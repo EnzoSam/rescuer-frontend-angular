@@ -61,11 +61,14 @@ export class LoginComponent implements OnInit {
     this.login.password = this.password.value + '';
     this._authService.login(this.login).then(response => {
 
-      this._authService.rememberUser(this.login.email, response.token);
+      console.log(response)
+      this._authService.rememberUser
+      (this.login.email, response.token);
       this._router.navigate(['../home']);
 
     }).catch(error => {
 
+      console.log(error)
       if (error.status === 401)
         this._uiService.setNewErrorStatus(error.error.message, error);
       else 

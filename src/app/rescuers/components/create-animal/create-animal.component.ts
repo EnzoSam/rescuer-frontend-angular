@@ -17,6 +17,10 @@ import { SelectImageComponent } from '../select-image/select-image.component';
 import { SelectNameComponent } from '../select-name/select-name.component';
 import { AtributesGroup } from '../../../admin/constants/atributes.constant';
 import { UploadableFile } from '../../../shared/interfaces/uploadableFile';
+import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
+import { Router } from '@angular/router';
+import { RescuersPaths } from '../../constants/rescuersPaths.constant';
+import { UiService } from '../../../shared/services/ui.service';
 
 @Component({
   selector: 'app-create-animal',
@@ -56,7 +60,9 @@ export class CreateAnimalComponent {
   animal:Animal;
 
   constructor(private _formBuilder: FormBuilder,
-    private _animalService:AnimalService
+    private _animalService:AnimalService,
+    private _router:Router,
+    private _uiService:UiService
   ) {
     this.animal = this._animalService.new();
   }
@@ -90,6 +96,26 @@ export class CreateAnimalComponent {
 
   onSubmit()
   {
-    console.log(this.animal);
+    this._animalService.create(this.animal)
+    .then((response:IBasicResponse)=>
+    {
+        if(response.data)
+        {
+          this._router.navigate([
+            RescuersPaths.publications + '/'+ 
+            RescuersPaths.postAnimalDetail, response.data])
+        }
+        else
+        {
+          console.log(response)
+          this._uiService.setNewErrorStatus('Error desconocido.', undefined);
+        }
+    })
+    .catch(err=>
+      {
+        console.log(err)
+        this._uiService.setNewErrorStatus('Error al crear publicación.',err)
+      }
+    )
   }
 }

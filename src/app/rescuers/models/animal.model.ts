@@ -5,13 +5,15 @@ export class Animal implements IPost
 {
     id:any
     name:string
-    image?:string
+    userId:string
+    image?:string    
     description?:string
     atributes:IAtribute[]
     
-    constructor(_id:any, _name:string) 
+    constructor(_id:any, _name:string, _userId:string) 
     {
         this.name = _name;
+        this.userId = _userId;
         this.atributes = [];
     }
     getId() {

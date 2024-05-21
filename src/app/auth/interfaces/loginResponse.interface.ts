@@ -3,4 +3,5 @@ import { IBasicResponse } from "../../core/interfaces/responses/basicresponse.in
 export interface ILoginResponse extends IBasicResponse
 {
     token:string;
+    userId:string;
 }

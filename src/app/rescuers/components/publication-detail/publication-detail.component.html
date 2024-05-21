@@ -1,14 +1,16 @@
-<div *ngIf="publication" class="publication-detail-container">
-    <div class="publication">
+<div *ngIf="post" class="publication-detail-container">
+    <div class="animal-data-container">
         <h2>
-            {{publication.getTitle()}}
+            {{post.name}}
         </h2>
-        <img class="publication-image" [src]="publication.getImage()" [alt]="publication.getTitle()">
+        <img class="publication-image" 
+        [src]="getUrlImage()" 
+        [alt]="'Imagen de  ' + post.name">
         <p>
-            {{publication.getDescription()}}
+            {{post.description}}
         </p>
     </div>
     <div class="user-publication-detail">
-        user
+        <app-post-user-detail [userId]="post.userId"></app-post-user-detail>
     </div>
 </div>

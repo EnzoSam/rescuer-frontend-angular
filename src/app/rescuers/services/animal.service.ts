@@ -17,7 +17,7 @@ export class AnimalService extends BaseAuthService {
 
   new():Animal
   {
-    return new Animal(undefined,'');
+    return new Animal(undefined,'', '');
   }
 
   getAll(): Promise<IBasicResponse> {
@@ -73,6 +73,7 @@ export class AnimalService extends BaseAuthService {
   }
 
   create(animal:Animal): Promise<IBasicResponse> {
+
     return new Promise((resolve, reject) => {
       this._httpClient.post<IBasicResponse>
       (this.getBaseUrlNameSpace(), animal)
