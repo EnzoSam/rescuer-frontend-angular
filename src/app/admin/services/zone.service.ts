@@ -4,15 +4,18 @@ import { BaseServiceService } from '../../core/service/baseservice.service';
 import { IBasicResponse } from "../../core/interfaces/responses/basicresponse.interface";
 import { IZone } from '../interfaces/izone.interface';
 import { ZoneType } from '../constants/zones.constants';
+import { UiService } from '../../shared/services/ui.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneService extends BaseServiceService {
 
-  constructor(protected override _httpClient: HttpClient) {
+  constructor(protected override _httpClient: HttpClient,
+    private _uiService:UiService
+  ) {
     super(_httpClient);
-    this.nameSpace = 'zones';
+    this.nameSpace = 'zones';    
   }
 
   new():IZone
@@ -24,6 +27,19 @@ export class ZoneService extends BaseServiceService {
         zoneType:'',
         parentZoneId: undefined
     }
+  }
+
+  loadAppLocation()
+  {
+    this.getRoots()
+    .then((response:IBasicResponse)=>
+    {
+        if(response.data.length > 0)
+        {
+          this._uiService.setZoneStatus(response.data.at(0));
+        }
+    });
+    
   }
 
   getAll(): Promise<IBasicResponse> {

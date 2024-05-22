@@ -5,6 +5,9 @@ import { FindPublicationCardComponent } from "../find-publication-card/find-publ
 import { ButtonComponent } from "../../../shared/components/button/button.component";
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { PostService } from '../../services/post.service';
+import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
+import { UiService } from '../../../shared/services/ui.service';
 
 @Component({
     selector: 'app-find-animal-list',
@@ -17,19 +20,26 @@ export class FindAnimalListComponent implements OnInit{
 
   publications:IPost[];
 
-  constructor()
+  constructor(private _postService:PostService,
+    private _uiService:UiService
+  )
   {
     this.publications = [];
   }
 
   ngOnInit(): void {
-    //this.publications.push({id:1, title:'Publicacion 1', description:'', image:'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg'});
-    //this.publications.push({id:2, title:'Publicacion 2', description:'', image:'https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_1280.jpg'});
-    //this.publications.push({id:3, title:'Publicacion 3',  description:'',image:'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg'});
-    //this.publications.push({id:4, title:'Publicacion 4', description:'', image:'https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_1280.jpg'});
-    //this.publications.push({id:5, title:'Publicacion 5',  description:'',image:'https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg'});
-    //this.publications.push({id:6, title:'Publicacion 5',  description:'',image:'https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074_1280.jpg'});
 
+    this._postService.filter()
+    .then((response:IBasicResponse)=>
+    {
+      this.publications = response.data;
+    })
+    .catch(error=>
+      {
+          this._uiService.setNewErrorStatus
+          ('Eror al recuperar publicaciones', error);
+      }
+    )
   }
   
 }

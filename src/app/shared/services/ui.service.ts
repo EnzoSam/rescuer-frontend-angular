@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IStatus } from '../interfaces/status.interface';
 import { IAuthentication } from '../interfaces/authentication.interface';
+import { IZone } from '../../admin/interfaces/izone.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ export class UiService {
 
   private siteStatus: any = new BehaviorSubject<IStatus>({} as IStatus);
   private accountStauts: any = new BehaviorSubject<IAuthentication>({} as IAuthentication);
+  private zoneStatus: BehaviorSubject<IZone | undefined> = new BehaviorSubject<IZone | undefined>(undefined);
+
   constructor() {
     this.loadAuthentication();
    }
@@ -22,6 +25,11 @@ export class UiService {
   onAccountStatusChange(): Observable<IAuthentication>
   {
     return this.accountStauts.asObservable();
+  }
+
+  onZoneStatusChange(): Observable<IZone | undefined>
+  {
+    return this.zoneStatus.asObservable();
   }
 
   setNewState(state:IStatus):void
@@ -52,6 +60,17 @@ export class UiService {
   getAuthentication():IAuthentication
   {
     return this.accountStauts.value as IAuthentication;
+  }
+
+  setZoneStatus(zone:IZone | undefined):void
+  {
+    this.zoneStatus.next(zone);
+    console.log(zone);
+  }
+
+  getZone():IZone | undefined
+  {
+    return this.zoneStatus.value;
   }
   
   isAuthenticated():boolean

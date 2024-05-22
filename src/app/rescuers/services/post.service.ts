@@ -14,19 +14,17 @@ export class PostService extends BaseAuthService {
     private _animalService:AnimalService
   ) {
     super(_httpClient);
-    this.nameSpace = 'animals';
+    this.nameSpace = 'posts';
   }
 
-  new():Animal
-  {
-    return new Animal(undefined,'', '');
-  }
-
-  getAll(): Promise<IBasicResponse> {
+  filter(): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<IBasicResponse>
       (this.getBaseUrlNameSpace())
         .subscribe((response:IBasicResponse) => {
+
+          let posts = [];
+          
           resolve(response);            
         },
           error => {
