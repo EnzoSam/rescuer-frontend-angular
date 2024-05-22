@@ -4,6 +4,7 @@ import { IBasicResponse } from "../../core/interfaces/responses/basicresponse.in
 import { Animal } from '../models/animal.model';
 import { BaseAuthService } from '../../core/service/baseAuth.service';
 import { AnimalService } from './animal.service';
+import { IFilter } from '../interfaces/filter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,10 @@ export class PostService extends BaseAuthService {
     this.nameSpace = 'posts';
   }
 
-  filter(): Promise<IBasicResponse> {
+  filter(filter:IFilter | undefined): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get<IBasicResponse>
-      (this.getBaseUrlNameSpace())
+      this._httpClient.post<IBasicResponse>
+      (this.getBaseUrlNameSpace(), filter)
         .subscribe((response:IBasicResponse) => {
 
           let posts = [];

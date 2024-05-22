@@ -1,7 +1,7 @@
 export interface IPost
 {
-    getId():any
-    getTitle():string
-    getImage():string |  undefined
-    getDescription():string | undefined
+    id:any
+    title:string
+    image:string |  undefined
+    description:string | undefined
 }

@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../../shared/services/ui.service';
+import { IFilter } from '../../interfaces/filter.interface';
 
 @Component({
     selector: 'app-find-animal-list',
@@ -19,6 +20,7 @@ import { UiService } from '../../../shared/services/ui.service';
 export class FindAnimalListComponent implements OnInit{
 
   publications:IPost[];
+  filter:IFilter | undefined;
 
   constructor(private _postService:PostService,
     private _uiService:UiService
@@ -29,7 +31,7 @@ export class FindAnimalListComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this._postService.filter()
+    this._postService.filter(this.filter)
     .then((response:IBasicResponse)=>
     {
       this.publications = response.data;
