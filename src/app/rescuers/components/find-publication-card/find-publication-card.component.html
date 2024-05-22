@@ -3,7 +3,7 @@
     <mat-card-title>{{publication.title}}</mat-card-title>
     <mat-card-subtitle>Perro</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="getUrlImage()" [alt]="publication.title">
+  <img id="post-image" mat-card-image [src]="getUrlImage()" [alt]="publication.title">
   <mat-card-content>
     <p>
       {{publication.description}}
