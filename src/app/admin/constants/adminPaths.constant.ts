@@ -5,7 +5,9 @@ export const AdminPaths =
     atributeDetail:'atribute-detail',
     zone:'zones',
     zoneDetail:'zone-detail',
-    zoneChildDetail:'zone-child-detail'
+    zoneChildDetail:'zone-child-detail',
+    usefulData:'usefulData',
+    usefulDataDetail:'usefulDataDetail'
 }
 
 export const AdminParamPaths =
