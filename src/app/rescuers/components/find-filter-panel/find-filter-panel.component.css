@@ -1,7 +1,11 @@
-.animal-type {}
+.atributes-container
+{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-.location {}
-
-.gender {}
-
-.age {}
+mat-slide-toggle {
+    margin-right: 10px;
+}

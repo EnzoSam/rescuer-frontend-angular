@@ -5,7 +5,7 @@
     </div>
 
     <div class="publications-container">
-        @for (publication of publications; track publication.getId()) {
+        @for (publication of publications; track publication.id) {
 
             <app-find-publication-card [publication]="publication"></app-find-publication-card>
         }
