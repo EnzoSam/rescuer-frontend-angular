@@ -12,7 +12,7 @@ export class UseflDataService extends BaseServiceService {
 
   constructor(protected override _httpClient: HttpClient) {
     super(_httpClient);
-    this.nameSpace = 'usefulData';
+    this.nameSpace = 'usefuldata';
   }
 
   new():IUsefulData
