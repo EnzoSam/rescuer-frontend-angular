@@ -20,6 +20,7 @@ export class UseflDataService extends BaseServiceService {
     return {
       id:undefined,
         data:'',
+        description:'',
         contacts:[]
     }
   }

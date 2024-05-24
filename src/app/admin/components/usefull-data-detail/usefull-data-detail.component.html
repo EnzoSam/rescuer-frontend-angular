@@ -13,8 +13,14 @@
             <input matInput formControlName="data" required>
             <mat-error *ngIf="data && data.errors?.['required']">Requerido</mat-error>
           </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="description" required>
+            <mat-error *ngIf="description && description.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>          
   
-          <app-contacts-creator></app-contacts-creator>
+          <app-contacts-creator [contacts]="usefulData.contacts"></app-contacts-creator>
 
           <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
   

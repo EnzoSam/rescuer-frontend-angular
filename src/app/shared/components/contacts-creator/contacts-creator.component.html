@@ -1,3 +1,7 @@
+<h3>Contactos</h3>
+<button mat-mini-fab color="accent" type="button" (click)="add()">
+    <mat-icon>add</mat-icon>
+</button>
 @for (c of contacts; track $index) {
-    <app-contact></app-contact>
+    <app-contact (onContactCommited)="onContactCommited($event)" [contactModel]="c" ></app-contact>
 }

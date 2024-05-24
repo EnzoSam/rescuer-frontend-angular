@@ -4,5 +4,6 @@ export interface IUsefulData
 {
     id:any,
     data:string
+    description:string
     contacts:IContact[]
 }

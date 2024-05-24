@@ -30,7 +30,7 @@ import { UseflDataService } from '../../services/usefulData.service';
 export class UsefullDataListComponent implements OnInit {
 
   usefulDatas:IUsefulData[];
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['data'];
   selectedAtribute?: IUsefulData;
   paths = AdminPaths;
 

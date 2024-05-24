@@ -1,8 +1,8 @@
 <div class="container">
 
-    <h1>Atributos</h1>
+    <h1>Datos útiles</h1>
 
-    <button class="new-btn" [routerLink]="'../' + paths.atributeDetail"  mat-raised-button color="primary">Nuevo</button>
+    <button class="new-btn" [routerLink]="'../' + paths.usefulDataDetail"  mat-raised-button color="primary">Nuevo</button>
     <table mat-table [dataSource]="usefulDatas" multiTemplateDataRows class="mat-elevation-z8">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -15,7 +15,7 @@
                 <div class="example-element-detail"
                     [@detailExpand]="atributeIter == selectedAtribute ? 'expanded' : 'collapsed'">
                     <div class="row-actions">
-                        <button mat-raised-button [routerLink]="['../' + paths.atributeDetail, atributeIter.id]">Ediar</button>
+                        <button mat-raised-button [routerLink]="['../' + paths.usefulDataDetail, atributeIter.id]">Ediar</button>
                         <button (click)="delete()" mat-raised-button>Eliminar</button>
                     </div>
                 </div>

@@ -23,6 +23,7 @@ export const AdminRoutes: Routes = [
       { path: AdminPaths.zoneChildDetail + "/:parentId", component: ZoneDetailComponent },
       { path: AdminPaths.zoneDetail+ '/:' + RouterPathParams.id, component: ZoneDetailComponent },
       { path: AdminPaths.usefulData, pathMatch:'full', component: UsefullDataListComponent },
+      { path: AdminPaths.usefulDataDetail,pathMatch:'full', component: UsefullDataDetailComponent },
       { path: AdminPaths.usefulDataDetail+ '/:' + RouterPathParams.id, component: UsefullDataDetailComponent },
     ]
   }

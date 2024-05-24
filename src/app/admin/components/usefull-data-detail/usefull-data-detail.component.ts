@@ -37,15 +37,18 @@ export class UsefullDataDetailComponent {
     this.usefulData = this._usefulDataService.new();
     this.form = new FormGroup({
       data : new FormControl('', [Validators.required]),
+      description : new FormControl('', [Validators.required]),
     });      
   }
 
   get data() { return this.form.get('data'); }
+  get description() { return this.form.get('description'); }
   
   submit(e: any): void {
     e.preventDefault();
 
     this.usefulData.data  = this.form.value.data;
+    this.usefulData.description  = this.form.value.description;
     this._usefulDataService.createOrUpdeate(this.usefulData)
     .then((response:IBasicResponse) => {
       
@@ -78,6 +81,7 @@ export class UsefullDataDetailComponent {
       this.usefulData = response.data;
       this.form.patchValue({
         data: this.usefulData.data,
+        description: this.usefulData.description
         });
 
     }).catch(error => {
