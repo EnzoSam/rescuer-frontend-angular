@@ -14,6 +14,8 @@ import { UiService } from '../../../shared/services/ui.service';
 import { AdminPaths } from '../../constants/adminPaths.constant';
 import { IUsefulData } from '../../interfaces/iusefulData.interface';
 import { ContactsCreatorComponent } from '../../../shared/components/contacts-creator/contacts-creator.component';
+import { IContact } from '../../interfaces/icontact.interface';
+import { ContactService } from '../../../shared/services/contact.service';
 
 @Component({
   selector: 'app-usefull-data-detail',
@@ -32,7 +34,8 @@ export class UsefullDataDetailComponent {
   constructor(private _usefulDataService:UseflDataService,
     private _router:Router,
     private _uiService:UiService,
-    private _activateRoute:ActivatedRoute)
+    private _activateRoute:ActivatedRoute,
+  private _contactService:ContactService)
   {
     this.usefulData = this._usefulDataService.new();
     this.form = new FormGroup({
@@ -71,6 +74,14 @@ export class UsefullDataDetailComponent {
         }
       });
     }
+    else
+    {
+      if(!this.usefulData.contacts || this.usefulData.contacts.length === 0)
+        {
+          this.usefulData.contacts = []
+          this.usefulData.contacts.push(this._contactService.new());
+        }
+    }
   }
 
   load(id:any)
@@ -84,9 +95,19 @@ export class UsefullDataDetailComponent {
         description: this.usefulData.description
         });
 
+        if(!this.usefulData.contacts || this.usefulData.contacts.length === 0)
+        {
+          this.usefulData.contacts = []
+          this.usefulData.contacts.push(this._contactService.new());
+        }
+
     }).catch(error => {
       this._uiService.setNewErrorStatus(error.message, error);
     });
   }
 
+  onContactChanged(_contacts:IContact[])
+  {
+    this.usefulData.contacts = _contacts;
+  }
 }

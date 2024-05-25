@@ -1,7 +1,18 @@
-<h3>Contactos</h3>
-<button mat-mini-fab color="accent" type="button" (click)="add()">
-    <mat-icon>add</mat-icon>
-</button>
-@for (c of contacts; track $index) {
-    <app-contact (onContactCommited)="onContactCommited($event)" [contactModel]="c" ></app-contact>
+<div class="contacts-header">
+    <h3>Contactos</h3>
+    <button id="btnAdd" mat-mini-fab color="accent" type="button" (click)="add()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+@if(contacts && contacts.length > 0)
+{
+<div class="contact-list-container">
+    @for (c of contacts; track $index) {
+
+    <app-contact (onContactCommited)="onContactCommited($event)" (onContactRemoved)="onContactRemove($event)"
+        [contactModel]="c" [id]="$index"></app-contact>
+
+    }
+</div>
 }

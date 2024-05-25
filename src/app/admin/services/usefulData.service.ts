@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseServiceService } from '../../core/service/baseservice.service';
-import { IAtribute } from '../interfaces/iatribute.interface';
 import { IBasicResponse } from "../../core/interfaces/responses/basicresponse.interface";
 import { IUsefulData } from '../interfaces/iusefulData.interface';
 
@@ -10,7 +9,8 @@ import { IUsefulData } from '../interfaces/iusefulData.interface';
 })
 export class UseflDataService extends BaseServiceService {
 
-  constructor(protected override _httpClient: HttpClient) {
+  constructor(protected override _httpClient: HttpClient
+  ) {
     super(_httpClient);
     this.nameSpace = 'usefuldata';
   }

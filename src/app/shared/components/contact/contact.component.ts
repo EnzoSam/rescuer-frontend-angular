@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IContact } from '../../../admin/interfaces/icontact.interface';
 import { ContactService } from '../../services/contact.service';
@@ -18,20 +18,27 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
-  @Input() contactModel:IContact;
+  @Input() contactModel?:IContact;
+  @Input() id:any;
   form:FormGroup;
   @Output() onContactCommited:EventEmitter<IContact> = new EventEmitter<IContact>();
   @Output() onContactRemoved:EventEmitter<IContact> = new EventEmitter<IContact>();
   
   constructor(private _contactService:ContactService)
   {
-      this.contactModel = _contactService.new();
       this.form = new FormGroup({
         contact : new FormControl('', [Validators.required]),
         type : new FormControl('', [Validators.required]),
       });  
+  }
+  ngOnInit(): void {
+
+    this.form.patchValue({
+      contact: this.contactModel?.contact,
+      type: this.contactModel?.type
+      });
   }
 
   get contact() { return this.form.get('contact'); }
@@ -39,10 +46,12 @@ export class ContactComponent {
 
   onSubmit(e:any)
   {
-    this.contactModel.contact = this.form.value.contact;
-    this.contactModel.type = this.form.value.type;
-    console.log(this.contactModel);
-    this.onContactCommited.emit(this.contactModel);
+    if(this.contactModel)
+      {
+        this.contactModel.contact = this.form.value.contact;
+        this.contactModel.type = this.form.value.type;
+        this.onContactCommited.emit(this.contactModel);
+      }
   }
 
   remove()

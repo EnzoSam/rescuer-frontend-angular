@@ -1,0 +1,17 @@
+.datas-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:20px;
+    padding: 20px;
+}
+
+mat-card
+{
+    width: 300px;
+}
+
+h1{
+    text-align: center;
+}

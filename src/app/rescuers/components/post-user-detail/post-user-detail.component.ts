@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { IUser } from '../../../auth/interfaces/iuser.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-post-user-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatCardModule,MatButtonModule],
   templateUrl: './post-user-detail.component.html',
   styleUrl: './post-user-detail.component.css'
 })

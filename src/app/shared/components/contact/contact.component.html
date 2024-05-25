@@ -1,29 +1,23 @@
-<form [formGroup]="form" (submit)="onSubmit($event)">
+<form [id]="'form' + id" [formGroup]="form" (submit)="onSubmit($event)">
     <mat-card>
-        <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Contacto</mat-label>
+            <input matInput formControlName="contact" required>
+            <mat-error *ngIf="contact && contact.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Contacto</mat-label>
-                <input matInput formControlName="contact" required>
-                <mat-error *ngIf="contact && contact.errors?.['required']">Requerido</mat-error>
-            </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo</mat-label>
+            <input matInput formControlName="type" required>
+            <mat-error *ngIf="type && type.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Tipo</mat-label>
-                <input matInput formControlName="type" required>
-                <mat-error *ngIf="type && type.errors?.['required']">Requerido</mat-error>
-            </mat-form-field>
+        <button mat-mini-fab color="accent">
+        <mat-icon>check</mat-icon>
+        </button>
+        <button mat-mini-fab color="accent" type="button" (click)="remove()">
+            <mat-icon>remove</mat-icon>
+        </button>   
 
-            <button mat-mini-fab color="accent">
-            <mat-icon>check</mat-icon>
-            </button>
-            <button mat-mini-fab color="accent" type="button" (click)="remove()">
-                <mat-icon>remove</mat-icon>
-            </button>            
-
-        </mat-card-content>
-        <mat-card-actions>
-
-        </mat-card-actions>
     </mat-card>
 </form>

@@ -1,0 +1,13 @@
+.detail-container
+{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+mat-card
+{
+    display: flex;
+    
+}

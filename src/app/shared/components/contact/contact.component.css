@@ -1,6 +1,11 @@
-mat-card-content
+mat-card
 {
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+mat-card
+{
+    padding: 10px;
 }

@@ -1,0 +1,19 @@
+.contacts-header
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#btnAdd
+{
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.contact-list-container
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

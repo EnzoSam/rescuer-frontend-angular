@@ -65,7 +65,6 @@ export class UiService {
   setZoneStatus(zone:IZone | undefined):void
   {
     this.zoneStatus.next(zone);
-    console.log(zone);
   }
 
   getZone():IZone | undefined

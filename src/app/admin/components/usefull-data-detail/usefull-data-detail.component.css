@@ -5,14 +5,13 @@
     width: 100%;
     height: calc(100vh - 80px);
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     margin-top: 10px;    
 }
 
 mat-card
 {
-    margin-top: -200px;
-    width: 400px;
+    width: 600px;
 }
 
 mat-card-content{
