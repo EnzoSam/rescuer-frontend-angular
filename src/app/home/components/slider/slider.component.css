@@ -1,8 +1,8 @@
 .slider-container
 {
-    margin-top: 80px;
     height: calc(100vh - 80px);
     background-color: #F6F4F5;
+    overflow: hidden;
 }
 
 .slider-image{

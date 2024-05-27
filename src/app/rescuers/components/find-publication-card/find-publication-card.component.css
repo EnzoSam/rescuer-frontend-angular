@@ -3,6 +3,11 @@
     width: 300px;
     height: 350px;
     cursor: pointer;
+    
+}
+.publication-card-container:hover
+{
+    transform: scale(102%);
 }
 
 #post-image
@@ -10,4 +15,7 @@
     object-fit: cover;
     max-width: 300px;
     max-height: 250px;
+
+    min-width: 300px;
+    min-height: 250px;
 }

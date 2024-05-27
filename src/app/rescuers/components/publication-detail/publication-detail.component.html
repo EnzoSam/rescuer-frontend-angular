@@ -3,12 +3,16 @@
         <h2>
             {{post.name}}
         </h2>
-        <img class="publication-image" 
-        [src]="getUrlImage()" 
-        [alt]="'Imagen de  ' + post.name">
+        <div class="image-container">
+            <img class="publication-image" 
+            [src]="getUrlImage()" 
+            [alt]="'Imagen de  ' + post.name">
+        </div>
         <p>
             {{post.description}}
         </p>
     </div>
-    <app-post-user-detail [userId]="post.userId"></app-post-user-detail>
+    <div class="user-detail-container">
+        <app-post-user-detail [userId]="post.userId"></app-post-user-detail>
+    </div>
 </div>

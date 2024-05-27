@@ -8,22 +8,26 @@ export class Animal
     userId:string
     image?:string    
     description?:string
-    atributes:IAtribute[]
+    atributesModels:IAtribute[]
+    atributes:any[]
     
     constructor(_id:any, _name:string, _userId:string) 
     {
         this.name = _name;
         this.userId = _userId;
+        this.atributesModels = [];
         this.atributes = [];
     }    
 
     setAtribute(_group:string, _atribute:IAtribute)
     {
-        this.atributes = this.atributes.filter
+        this.atributesModels = this.atributesModels.filter
             (a => a.group !== _group);
 
         if(_atribute)
-            this.atributes.push(_atribute);       
+            this.atributesModels.push(_atribute);  
+        
+        this.atributes = this.atributesModels.map(a=>a.id);
     }
 
     setName(_name:string | undefined)
