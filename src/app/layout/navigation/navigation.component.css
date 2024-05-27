@@ -14,9 +14,12 @@ nav{
 mat-toolbar
 {
     gap: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .app-title
 {
     flex-grow: 1;
+    padding-left: 100px;
 }

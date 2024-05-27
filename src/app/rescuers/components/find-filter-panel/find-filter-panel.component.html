@@ -1,26 +1,46 @@
-<h4>Filtro</h4>
-<div class="atributes-container">
-    <div>
-        @for (a of types; track a.id) {
-        <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
-            {{a.name}}
-        </mat-slide-toggle>
-        }
-    </div>
+<mat-drawer-container class="component-with-nav-container" autosize>
+    <mat-drawer class="dashboard-menu" #drawer mode="side" opened>
+
+        <div class="filter-header">
+            <h4>Filtros</h4>
+            <mat-icon *ngIf="drawer.opened" #btnClose autosize class="close-sidebar" type="button" mat-button (click)="drawer.toggle()">
+                close
+            </mat-icon>
+        </div>
+
+        <div class="atributes-container">
+            <div>
+                @for (a of types; track a.id) {
+                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                    {{a.name}}
+                </mat-slide-toggle>
+                }
+            </div>
+
+            <div>
+                @for (a of genders; track a.id) {
+                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                    {{a.name}}
+                </mat-slide-toggle>
+                }
+            </div>
+
+            <div>
+                @for (a of ages; track a.id) {
+                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                    {{a.name}}
+                </mat-slide-toggle>
+                }
+            </div>
+        </div>
+    </mat-drawer>
 
     <div>
-        @for (a of genders; track a.id) {
-        <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
-            {{a.name}}
-        </mat-slide-toggle>
-        }
+        <mat-icon *ngIf="!drawer.opened" #btnOpen type="button" mat-button (click)="drawer.toggle()">
+            menu
+        </mat-icon>
+
     </div>
 
-    <div>
-        @for (a of ages; track a.id) {
-        <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
-            {{a.name}}
-        </mat-slide-toggle>
-        }
-    </div>
-</div>
+
+</mat-drawer-container>

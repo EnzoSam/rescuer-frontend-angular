@@ -1,6 +1,5 @@
 .atributes-container
 {
-    padding-left: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -8,4 +7,29 @@
 
 mat-slide-toggle {
     margin-right: 10px;
+}
+
+.dashboard-menu
+{
+    min-width: 40%;
+}
+
+mat-drawer-container{
+    height: 100%;
+    padding: 20px;
+}
+
+.filter-header
+{
+    display: flex;
+    flex-direction: row;
+}
+
+h4{
+    flex-grow: 1;
+}
+
+mat-icon
+{
+    cursor: pointer;
 }
