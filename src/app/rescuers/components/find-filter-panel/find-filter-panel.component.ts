@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IAtribute } from '../../../admin/interfaces/iatribute.interface';
 import { AtributeService } from '../../../admin/services/atributes.service';
@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
+import { IFilter } from '../../interfaces/filter.interface';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
   selector: 'app-find-filter-panel',
@@ -28,8 +30,11 @@ export class FindFilterPanelComponent implements OnInit{
   ages:IAtributeFilter[] = [];
   genders:IAtributeFilter[] = [];
 
+  @Output() onFilterChanged:EventEmitter<IFilter> = new EventEmitter<IFilter>();
+
   constructor(private _atributeService:AtributeService,
-    private _uiService:UiService
+    private _uiService:UiService,
+    private _filterService:FilterService
   )
   {
   }
@@ -66,5 +71,13 @@ export class FindFilterPanelComponent implements OnInit{
         this._uiService.setNewErrorStatus('Error al obtener atributos', error);
       }
     )
+  }
+
+  onAtributeToogle(atribute:IAtribute)
+  {
+    let filter = this._filterService.new();
+    filter.atributes = [...this.types,...this.genders,...this.ages]
+    .filter(a=>a.checked).map(a=>a.id);
+    this.onFilterChanged.emit(filter);
   }
 }

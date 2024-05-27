@@ -11,7 +11,7 @@
         <div class="atributes-container">
             <div>
                 @for (a of types; track a.id) {
-                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                <mat-slide-toggle (change)="onAtributeToogle(a)" [(ngModel)]="a.checked" color="primary">
                     {{a.name}}
                 </mat-slide-toggle>
                 }
@@ -19,7 +19,7 @@
 
             <div>
                 @for (a of genders; track a.id) {
-                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                <mat-slide-toggle (change)="onAtributeToogle(a)" [(ngModel)]="a.checked" color="primary">
                     {{a.name}}
                 </mat-slide-toggle>
                 }
@@ -27,7 +27,7 @@
 
             <div>
                 @for (a of ages; track a.id) {
-                <mat-slide-toggle [(ngModel)]="a.checked" color="primary">
+                <mat-slide-toggle (change)="onAtributeToogle(a)" [(ngModel)]="a.checked" color="primary">
                     {{a.name}}
                 </mat-slide-toggle>
                 }

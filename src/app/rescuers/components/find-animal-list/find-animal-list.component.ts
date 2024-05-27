@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPost } from '../../interfaces/post.interface';
 import { FindPublicationCardComponent } from "../find-publication-card/find-publication-card.component";
@@ -17,31 +17,14 @@ import { IFilter } from '../../interfaces/filter.interface';
     styleUrl: './find-animal-list.component.css',
     imports: [CommonModule, RouterLink, FindPublicationCardComponent, MatButtonModule]
 })
-export class FindAnimalListComponent implements OnInit{
+export class FindAnimalListComponent{
 
-  publications:IPost[];
-  filter:IFilter | undefined;
+  @Input() posts:IPost[];
 
-  constructor(private _postService:PostService,
-    private _uiService:UiService
-  )
+  constructor()
   {
-    this.publications = [];
+    this.posts = [];
   }
 
-  ngOnInit(): void {
-
-    this._postService.filter(this.filter)
-    .then((response:IBasicResponse)=>
-    {
-      this.publications = response.data;
-    })
-    .catch(error=>
-      {
-          this._uiService.setNewErrorStatus
-          ('Eror al recuperar publicaciones', error);
-      }
-    )
-  }
   
 }

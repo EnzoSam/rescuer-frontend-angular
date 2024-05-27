@@ -1,6 +1,6 @@
 <div class="find-animal-container">
     <aside class="find-filter">
-        <app-find-filter-panel></app-find-filter-panel>
+        <app-find-filter-panel (onFilterChanged)="onFilterChanged($event)"></app-find-filter-panel>
     </aside>
-    <app-find-animal-list class="animal-list"></app-find-animal-list>
+    <app-find-animal-list [posts]="posts" class="animal-list"></app-find-animal-list>
 </div>
