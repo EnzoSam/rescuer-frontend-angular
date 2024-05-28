@@ -24,9 +24,12 @@
       ></app-select-image>
     </mat-step>
     <mat-step label="Finalizar">
-      <div>
+      <div class="finish-container">
+        <p>
+
+        </p>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button (click)="onSubmit()">Finalizar</button>
+        <button mat-flat-button color="primary" (click)="onSubmit()">Finalizar</button>
       </div>
     </mat-step>
   </mat-stepper>

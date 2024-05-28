@@ -1,8 +1,5 @@
-<app-upload-file [urlBase]="urlUploads" 
-(fileUploaded)="onFileUploaded($event)"></app-upload-file>
-<button [disabled]="!file"
-(click)="onNext()"
- mat-raised-button color="primary">Siguiente</button>
-<img class="miniature-image" 
-*ngIf="file && file.name !== ''" 
-src={{getUrlImage()}} alt="Imagen animal">
+<div class="select-container">
+    <app-upload-file [urlBase]="urlUploads" (fileUploaded)="onFileUploaded($event)"></app-upload-file>
+    <button [disabled]="!file" (click)="onNext()" mat-raised-button color="primary">Siguiente</button>
+    <img class="miniature-image" *ngIf="file && file.name !== ''" src={{getUrlImage()}} alt="Imagen animal">
+</div>

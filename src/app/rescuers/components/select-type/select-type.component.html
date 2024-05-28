@@ -1,7 +1,7 @@
 <div class="select-type-container">
 @for (t of types; track t.id) {
 <mat-card class="atribute-for-create" (click)="onCardToogle(t)">
-    <img mat-card-image [src]="getUrlImage(t.image)">
+    <img color="primary" mat-card-image [src]="getUrlImage(t.image)">
     <mat-card-title>{{t.name}}</mat-card-title>
 
 </mat-card>

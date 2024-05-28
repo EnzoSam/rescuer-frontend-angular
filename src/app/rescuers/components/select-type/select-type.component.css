@@ -2,14 +2,19 @@
 {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
+    padding-top: 20px;
 }
 
 .atribute-for-create{
-    min-width: 200px;
+    min-width: 170px;
 }
 
 mat-card
 {
     cursor: pointer;
+}
+
+img{
+    object-fit: cover;
 }

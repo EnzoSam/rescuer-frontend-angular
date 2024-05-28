@@ -29,7 +29,7 @@ export class StatusPopupComponent implements OnInit, OnDestroy {
 
         this.show();        
         this.status = _status;
-        
+        console.log(_status)
         this.intervalSubscription = interval(3000)
           .subscribe(x => { this.hide(); });
       },
