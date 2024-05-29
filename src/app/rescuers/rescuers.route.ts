@@ -4,6 +4,7 @@ import { PublicationDetailComponent } from "./components/publication-detail/publ
 import { CreateAnimalComponent } from "./components/create-animal/create-animal.component";
 import { RescuersPaths } from "./constants/rescuersPaths.constant";
 import { RouterPathParams } from "../shared/constants/routesPaths.constant";
+import { authGuard } from "../auth.guard";
 
 export const RescuersRoutes: Routes = [
     {
@@ -11,7 +12,7 @@ export const RescuersRoutes: Routes = [
     },
     { path: 'find', component: FindAnimalComponent },
     { path: RescuersPaths.postAnimalDetail + '/:' + RouterPathParams.id, component: PublicationDetailComponent },
-    { path: RescuersPaths.create, component: CreateAnimalComponent },
+    { path: RescuersPaths.create, component: CreateAnimalComponent, canActivate: [authGuard] },
     
   ];
   
