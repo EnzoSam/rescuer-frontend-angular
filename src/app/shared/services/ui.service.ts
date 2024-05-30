@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IStatus } from '../interfaces/status.interface';
 import { IAuthentication } from '../interfaces/authentication.interface';
 import { IZone } from '../../admin/interfaces/izone.interface';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +54,8 @@ export class UiService {
      if(string && string !== '') 
      {
         let auth: IAuthentication = JSON.parse(string);
-        this.accountStauts.next(auth);
-     }
+        this.accountStauts.next(auth);        
+     }     
   }
 
   getAuthentication():IAuthentication

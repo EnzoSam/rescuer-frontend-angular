@@ -19,6 +19,17 @@ export class AuthService extends BaseNoAuthService {
     private _iuService:UiService) {
     super(_httpClient);
     this.nameSpace = 'auth';
+
+    _iuService.onAccountStatusChange().subscribe
+    ((auth:IAuthentication)=>
+      {
+        this.getRoles().then
+        ((roles:number[])=>
+        {
+          auth.roles = roles;
+          console.log(auth)
+        })
+      });
   }
 
   newLogin(): ILogin {
@@ -87,7 +98,8 @@ export class AuthService extends BaseNoAuthService {
   {
       let auth:IAuthentication = {
         userName,
-        token
+        token,
+        roles:[]
       };
       console.log(auth);
       localStorage.setItem('auth', JSON.stringify(auth));
@@ -142,6 +154,21 @@ export class AuthService extends BaseNoAuthService {
         },
           error => {
             reject({ statusCode: 500, message: error })
+          }
+        );
+    });
+  }    
+
+  getRoles(): Promise<number[]> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.get<IBasicResponse>
+      (this.getBaseUrlNameSpace() + 'roles' )
+        .subscribe((response:IBasicResponse) => {
+          console.log(response)
+          resolve(response.data);
+        },
+          error => {
+            reject('')
           }
         );
     });

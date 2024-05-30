@@ -30,8 +30,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(autReq).pipe(
     catchError((err: HttpErrorResponse) => {
       if (err.status === 401) {
-        _tokenService.setNewErrorStatus('No autorizado1', err);
-        return throwError(() => new Error('Unauthorized Exception'));
+        //_tokenService.setNewErrorStatus('No autorizado', err);
+        return throwError(() => new Error('No autorizado'));
       }
       else
       {

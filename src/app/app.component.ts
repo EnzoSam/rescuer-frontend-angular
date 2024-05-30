@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { SkeletonComponent } from "./layout/skeleton/skeleton.component";
 import { UiService } from './shared/services/ui.service';
 import { ZoneService } from './admin/services/zone.service';
+import { AuthService } from './auth/services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -15,7 +16,8 @@ import { ZoneService } from './admin/services/zone.service';
 export class AppComponent implements OnInit{
   title = 'rescuer-frontend-angular';
 
-  constructor(private _uiService:UiService,
+  constructor(private _authService:AuthService,
+    private _uiService:UiService,
     private _zoneService:ZoneService
   )
   {

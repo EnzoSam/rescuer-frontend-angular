@@ -1,6 +1,15 @@
 <div *ngIf="status && status.message" class="popup-container">
     <mat-chip-listbox>
-          <mat-chip-option *ngIf="status.data && status.data.error && status.data.error.message" 
-          selected  color="warn">{{status.data.error.message}}</mat-chip-option>
-      </mat-chip-listbox>
+        @if(status.message)
+        {
+            <mat-chip-option 
+            selected  color="warn">{{status.message}}</mat-chip-option>              
+        }
+        @else if(status.data && status.data.error && status.data.error.message)
+        {
+          <mat-chip-option 
+            selected  color="warn">{{status.data.error.message}}</mat-chip-option>           
+        }
+
+    </mat-chip-listbox>
 </div>
