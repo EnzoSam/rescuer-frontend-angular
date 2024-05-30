@@ -74,7 +74,8 @@ export class UiService {
   
   isAuthenticated():boolean
   {
-    if(this.getAuthentication())
+    if(this.getAuthentication() && 
+    this.getAuthentication().token && this.getAuthentication().token !== '')
       return true;
     else
       return false;

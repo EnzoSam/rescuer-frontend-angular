@@ -2,7 +2,6 @@
 {
     display: flex;
     flex-direction: column;
-    padding-left: 50px;
     padding-right: 50px;
     padding-top: 20px;
 }
@@ -34,13 +33,4 @@ h1
 .list-title
 {
     flex-grow: 1;
-}
-
-.publications-footer
-{
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    scale: 120%;
 }

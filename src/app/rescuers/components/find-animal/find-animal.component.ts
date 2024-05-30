@@ -8,13 +8,15 @@ import { IPost } from '../../interfaces/post.interface';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../../shared/services/ui.service';
 import { PostService } from '../../services/post.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-find-animal',
     standalone: true,
     templateUrl: './find-animal.component.html',
     styleUrl: './find-animal.component.css',
-    imports: [CommonModule, FindFilterPanelComponent, FindAnimalListComponent]
+    imports: [CommonModule, MatButtonModule,FindFilterPanelComponent, 
+        FindAnimalListComponent]
 })
 export class FindAnimalComponent implements OnInit{
 

@@ -3,7 +3,8 @@
 
         <div class="filter-header">
             <h4>Filtros</h4>
-            <mat-icon *ngIf="drawer.opened" #btnClose autosize class="close-sidebar" type="button" mat-button (click)="drawer.toggle()">
+            <mat-icon *ngIf="drawer.opened" #btnClose autosize class="close-sidebar" type="button" mat-button
+                (click)="drawer.toggle()">
                 close
             </mat-icon>
         </div>
@@ -36,8 +37,8 @@
     </mat-drawer>
 
     <div>
-        <mat-icon *ngIf="!drawer.opened" #btnOpen type="button" mat-button (click)="drawer.toggle()">
-            menu
+        <mat-icon id="filter-icon" *ngIf="!drawer.opened" #btnOpen color="primary" type="button" mat-button (click)="drawer.toggle()">
+            filter_alt
         </mat-icon>
 
     </div>

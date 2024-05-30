@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../../shared/services/ui.service';
 import { AdminPaths } from '../../constants/adminPaths.constant';
-import { AtributeService } from '../../services/atributes.service';
 import { IUsefulData } from '../../interfaces/iusefulData.interface';
 import { UseflDataService } from '../../services/usefulData.service';
 

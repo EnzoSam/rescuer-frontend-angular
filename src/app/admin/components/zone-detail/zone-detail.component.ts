@@ -40,7 +40,7 @@ export class ZoneDetailComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       code: new FormControl(''),
-      zoneType: new FormControl({value:'', disabled:true}, [Validators.required]),
+      zoneType: new FormControl('', [Validators.required]),
     });
   }
   ngOnInit(): void {
