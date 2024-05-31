@@ -44,4 +44,9 @@ mat-toolbar {
     padding-left: 5px;
     padding-right: 5px;
   }  
+
+  .menu-item
+  {
+    min-width:  100%;
+  }
 }

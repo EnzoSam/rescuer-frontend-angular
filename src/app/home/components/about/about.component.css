@@ -1,11 +1,16 @@
-p
-{
-    text-align: center;
-    padding-left: 100px;
-    padding-right: 100px;
-    font-size: 1.5rem;
+p {
+  text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
+  font-size: 1.5rem;
 }
-h1
-{
-    text-align: center;
+h1 {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
