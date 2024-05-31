@@ -1,11 +1,24 @@
 <nav>
     <mat-toolbar color="primary">
         <h1 class="app-title">Rescatistas</h1>
-        <button mat-button routerLink="home">Inicio</button>
-        <button mat-button routerLink="publications">Adopcion</button>
-        <button mat-button>Extraviados</button>
-        <button mat-button routerLink="useful-data">Datos útiles</button>
-        <button mat-button routerLink="contact">Contacto</button>
+        <div class="lg-menu">
+            <button mat-button routerLink="home">Inicio</button>
+            <button mat-button routerLink="publications">Adopcion</button>
+            <button mat-button>Extraviados</button>
+            <button mat-button routerLink="useful-data">Datos útiles</button>
+            <button mat-button routerLink="contact">Contacto</button>
+        </div>
         <app-user-menu></app-user-menu>
+
+        <button id="mobile-menu-button" mat-icon-button [matMenuTriggerFor]="mobileMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #mobileMenu="matMenu">
+            <button mat-menu-item routerLink="home">Inicio</button>
+            <button mat-menu-item routerLink="publications">Adopcion</button>
+            <button mat-menu-item>Extraviados</button>
+            <button mat-menu-item routerLink="useful-data">Datos útiles</button>
+            <button mat-menu-item routerLink="contact">Contacto</button>
+        </mat-menu>
     </mat-toolbar>
 </nav>

@@ -1,9 +1,32 @@
 <div class="find-animal-container">
-    <app-find-filter-panel (onFilterChanged)="onFilterChanged($event)"></app-find-filter-panel>
-    <section id="list">
-        <app-find-animal-list [posts]="posts" class="animal-list"></app-find-animal-list>
-        <div class="publications-footer">
-            <button mat-button color="primary">Cargar más</button>
-        </div>
-    </section>
+    <mat-drawer-container [hasBackdrop]="true">
+        <mat-drawer class="dashboard-menu" #drawer mode="over" opened>
+
+            <div class="filter-header">
+                <h4>Filtros</h4>
+                <mat-icon *ngIf="drawer.opened" #btnClose autosize class="close-sidebar" type="button" mat-button
+                    (click)="drawer.toggle()">
+                    close
+                </mat-icon>
+            </div>
+
+            <div class="atributes-container">
+                <app-find-filter-panel (onFilterChanged)="onFilterChanged($event)"></app-find-filter-panel>
+            </div>
+        </mat-drawer>
+
+        <mat-icon id="filter-icon" *ngIf="!drawer.opened" #btnOpen color="primary" type="button" mat-button
+            (click)="drawer.toggle()">
+            filter_alt
+        </mat-icon>
+
+        <section id="list">
+            <app-find-animal-list [posts]="posts" class="animal-list"></app-find-animal-list>
+            <div class="publications-footer">
+                <button mat-button color="primary">Cargar más</button>
+            </div>
+        </section>
+
+    </mat-drawer-container>
+
 </div>

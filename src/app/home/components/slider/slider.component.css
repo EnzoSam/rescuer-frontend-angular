@@ -6,7 +6,6 @@
     overflow: hidden;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 100px;
 }
 
 .slider-image{
@@ -45,4 +44,40 @@ h1
 #btnAdopt
 {
     margin-top: 100px;
+}
+
+@media (max-width: 600px) {
+
+    .slider-image{
+
+        right: 5px;
+        max-height: 60%;
+        width: 200px;
+        transform: scaleX(-1);
+    }
+
+    .phrases-container{
+        margin-left: 5px;
+        left: 5px;
+        top: 70px;
+    }
+
+    .first-prhase{
+        font-size: 2rem;
+    }
+    
+    .second-phrase{
+        font-size: 2rem;
+        margin-bottom: 20px;        
+    }    
+
+    .phrases-description{
+        max-width: 55%;
+    }
+
+    .slider-container
+    {
+        position: relative;
+        max-height:  70%;
+    }
 }

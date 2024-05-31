@@ -9,6 +9,9 @@ import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse
 import { UiService } from '../../../shared/services/ui.service';
 import { PostService } from '../../services/post.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
     selector: 'app-find-animal',
@@ -16,11 +19,13 @@ import { MatButtonModule } from '@angular/material/button';
     templateUrl: './find-animal.component.html',
     styleUrl: './find-animal.component.css',
     imports: [CommonModule, MatButtonModule,FindFilterPanelComponent, 
-        FindAnimalListComponent]
+        FindAnimalListComponent,MatIconModule,
+        MatSlideToggleModule,MatSidenavModule]
 })
 export class FindAnimalComponent implements OnInit{
 
     posts:IPost[] = [];
+    filterOpened:boolean = true;
 
     constructor(private _postService:PostService,
         private _uiService:UiService)

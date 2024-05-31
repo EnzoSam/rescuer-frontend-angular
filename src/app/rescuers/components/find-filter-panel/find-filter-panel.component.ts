@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IAtribute } from '../../../admin/interfaces/iatribute.interface';
 import { AtributeService } from '../../../admin/services/atributes.service';
@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtributesGroup } from '../../../admin/constants/atributes.constant';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { IFilter } from '../../interfaces/filter.interface';
 import { FilterService } from '../../services/filter.service';
@@ -39,8 +39,12 @@ export class FindFilterPanelComponent implements OnInit{
   {
   }
 
+
+
+
   ngOnInit(): void {
     
+
     this._atributeService.getAll()
     .then((response:IBasicResponse) =>
     {

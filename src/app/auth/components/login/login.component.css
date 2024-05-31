@@ -1,19 +1,30 @@
-.login-container{
- 
-    display:  flex;
-    flex-direction: column;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+mat-card {
+  width: 400px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  mat-card {
     width: 100%;
-    height: calc(100vh - 80px);
-    align-items: center;
-    justify-content: center;
-}
-
-mat-card
-{
-    width: 400px;
-}
-
-mat-card-content{
-    display: flex;
-    flex-direction: column;
+  }
 }
