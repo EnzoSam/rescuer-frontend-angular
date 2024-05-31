@@ -38,7 +38,7 @@ export class ResetPasswordComponent {
     this._authService.requestResetPassword(mailString).then(value=>
       {
         if(value.code == 200)
-          this._router.navigate(['../verify','1']);
+          this._router.navigate(['../auth/verify','1']);
         else
           this._uiService.setNewErrorStatus(value.message, value);
       }).catch(error=>

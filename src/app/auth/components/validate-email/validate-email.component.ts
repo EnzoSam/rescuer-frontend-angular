@@ -37,7 +37,7 @@ export class ValidateEmailComponent implements OnInit {
         this._authService.validateMail(email, token).then(value => {
           console.log(value);
           if (value.code == 200)
-            this._router.navigate(['../login']);
+            this._router.navigate(['../auth/login']);
           else
             this._uiService.setNewErrorStatus(value.message, value);
         }).catch(error => {

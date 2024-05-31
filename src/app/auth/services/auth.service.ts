@@ -115,7 +115,10 @@ export class AuthService extends BaseNoAuthService {
   requestResetPassword(email: string): Promise<IResult> {
     return new Promise((resolve, reject) => {
       this._httpClient.post<IResult>
-      (this.getBaseUrlNameSpace() + "no-auth/request-reset-password",{})
+      (this.getBaseUrlNameSpace() + "no-auth/request-reset-password",
+      {
+        email
+      })
         .subscribe(response => {
           resolve(response);
         },
