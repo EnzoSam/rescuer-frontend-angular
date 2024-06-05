@@ -4,6 +4,7 @@ import { IStatus } from '../interfaces/status.interface';
 import { IAuthentication } from '../interfaces/authentication.interface';
 import { IZone } from '../../admin/interfaces/izone.interface';
 import { AuthService } from '../../auth/services/auth.service';
+import { ROLES } from '../../auth/constants/role.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,12 @@ export class UiService {
   getAuthentication():IAuthentication
   {
     return this.accountStauts.value as IAuthentication;
+  }
+
+  isAdminAuthentication():boolean
+  {
+    let auht = this.getAuthentication();
+    return auht && auht.roles && auht.roles.includes(ROLES.ADMIN);
   }
 
   setZoneStatus(zone:IZone | undefined):void

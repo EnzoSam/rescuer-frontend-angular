@@ -1,4 +1,4 @@
-<div class="find-animal-container">
+<div class="component-with-nav-container find-animal-container">
     <mat-drawer-container [hasBackdrop]="true">
         <mat-drawer class="dashboard-menu" #drawer mode="over">
 
@@ -21,7 +21,10 @@
         </mat-icon>
 
         <section id="list">
-            <app-find-animal-list [posts]="posts" class="animal-list"></app-find-animal-list>
+            <app-find-animal-list 
+            (postStateChanged)="refresh()"
+            [posts]="posts" class="animal-list">
+            </app-find-animal-list>
             <div class="publications-footer">
                 <button mat-button color="primary">Cargar más</button>
             </div>

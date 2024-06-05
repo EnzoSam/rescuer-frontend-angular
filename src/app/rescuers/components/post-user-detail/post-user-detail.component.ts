@@ -29,7 +29,6 @@ export class PostUserDetailComponent implements OnInit{
       this._authService.getById(this.userId)
       .then((respone:IBasicResponse)=>
       {
-        console.log(respone.data);
         this.user = respone.data;
       })
     }

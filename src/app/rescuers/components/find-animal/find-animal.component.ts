@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FindFilterPanelComponent } from "../find-filter-panel/find-filter-panel.component";
 import { FindAnimalListComponent } from "../find-animal-list/find-animal-list.component";
 import { IFilter } from '../../interfaces/filter.interface';
-import { Animal } from '../../models/animal.model';
 import { IPost } from '../../interfaces/post.interface';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../../shared/services/ui.service';
@@ -26,19 +25,25 @@ export class FindAnimalComponent implements OnInit{
 
     posts:IPost[] = [];
     filterOpened:boolean = true;
-
+    lastFilter?:IFilter;
+    
     constructor(private _postService:PostService,
         private _uiService:UiService)
     {
         
     }
     ngOnInit(): void {
-       this.onFilterChanged(undefined)
+       this.onFilterChanged(undefined);
+    }
+
+    refresh()
+    {
+        this.onFilterChanged(this.lastFilter);
     }
 
     onFilterChanged(filter:IFilter | undefined)
     {
-        console.log(filter)
+        this.lastFilter = filter;
         this._postService.filter(filter)
         .then((response:IBasicResponse)=>
         {

@@ -1,7 +1,9 @@
+import { PostStates } from "../constants/posts.constants"
+
 export interface IFilter
 {
     pageFrom:number
     pageTo:number
-    state:number
     atributes:string[]  
+    state:PostStates
 }

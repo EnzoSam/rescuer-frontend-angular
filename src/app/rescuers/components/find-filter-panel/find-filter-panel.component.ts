@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IAtribute } from '../../../admin/interfaces/iatribute.interface';
 import { AtributeService } from '../../../admin/services/atributes.service';
@@ -10,17 +10,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtributesGroup } from '../../../admin/constants/atributes.constant';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDrawer, MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav';
+import {  MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { IFilter } from '../../interfaces/filter.interface';
 import { FilterService } from '../../services/filter.service';
+import { MatRadioModule } from '@angular/material/radio';
+import { PostStates } from '../../constants/posts.constants';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-find-filter-panel',
   standalone: true,
   imports: [CommonModule,FormsModule,ReactiveFormsModule,
     MatSlideToggleModule, MatIconModule, MatButtonModule,
-    MatSidenavModule,MatMenuModule],
+    MatSidenavModule,MatMenuModule,MatButtonModule,
+    MatRadioModule, MatDividerModule],
   templateUrl: './find-filter-panel.component.html',
   styleUrl: './find-filter-panel.component.css'
 })
@@ -29,6 +33,9 @@ export class FindFilterPanelComponent implements OnInit{
   types:IAtributeFilter[] = [];
   ages:IAtributeFilter[] = [];
   genders:IAtributeFilter[] = [];
+  postStetes = PostStates;
+  filterState:number = PostStates.Published;
+  isAdmin = false;
 
   @Output() onFilterChanged:EventEmitter<IFilter> = new EventEmitter<IFilter>();
 
@@ -39,11 +46,9 @@ export class FindFilterPanelComponent implements OnInit{
   {
   }
 
-
-
-
   ngOnInit(): void {
     
+    this.isAdmin = this._uiService.isAdminAuthentication();
 
     this._atributeService.getAll()
     .then((response:IBasicResponse) =>
@@ -77,9 +82,10 @@ export class FindFilterPanelComponent implements OnInit{
     )
   }
 
-  onAtributeToogle(atribute:IAtribute)
-  {
+  onFilterToogle()
+  {    
     let filter = this._filterService.new();
+    filter.state = this.filterState;
     filter.atributes = [...this.types,...this.genders,...this.ages]
     .filter(a=>a.checked).map(a=>a.id);
     this.onFilterChanged.emit(filter);

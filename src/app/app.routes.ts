@@ -15,7 +15,8 @@ export const routes: Routes = [
     loadChildren: () => import('./admin/admin.routes').then(m => m.AdminRoutes) },
     {path:'useful-data', component:UsefulldataPageComponent},
     {path:'contact', component:ContactPageComponent},
-    { path: 'publications', loadChildren: () => import('./rescuers/rescuers.route').then(m => m.RescuersRoutes) },
+    { path: 'publications', loadChildren: () => 
+        import('./rescuers/rescuers.route').then(m => m.RescuersRoutes) },
     {
         path:'**', component:ErrorDefaultComponent
     }

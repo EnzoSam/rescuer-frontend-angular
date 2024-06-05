@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPost } from '../../interfaces/post.interface';
 import { FindPublicationCardComponent } from "../find-publication-card/find-publication-card.component";
@@ -20,11 +20,15 @@ import { IFilter } from '../../interfaces/filter.interface';
 export class FindAnimalListComponent{
 
   @Input() posts:IPost[];
-
+  @Output() postStateChanged:EventEmitter<IPost> = new EventEmitter<IPost>();
+  
   constructor()
   {
     this.posts = [];
   }
 
-  
+  onPostStateChanged(_post:IPost)
+  {
+    this.postStateChanged.emit(_post);
+  }
 }

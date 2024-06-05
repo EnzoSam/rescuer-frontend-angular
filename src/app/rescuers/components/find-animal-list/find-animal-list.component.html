@@ -7,7 +7,9 @@
     <div class="publications-container">
         @for (publication of posts; track publication.id) {
 
-            <app-find-publication-card [publication]="publication"></app-find-publication-card>
+            <app-find-publication-card
+            (postStateChanged)="onPostStateChanged($event)"
+            [post]="publication"></app-find-publication-card>
         }
     </div>
 </div>

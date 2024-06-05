@@ -27,7 +27,6 @@ export class AuthService extends BaseNoAuthService {
         ((roles:number[])=>
         {
           auth.roles = roles;
-          console.log(auth)
         })
       });
   }
@@ -167,7 +166,6 @@ export class AuthService extends BaseNoAuthService {
       this._httpClient.get<IBasicResponse>
       (this.getBaseUrlNameSpace() + 'roles' )
         .subscribe((response:IBasicResponse) => {
-          console.log(response)
           resolve(response.data);
         },
           error => {

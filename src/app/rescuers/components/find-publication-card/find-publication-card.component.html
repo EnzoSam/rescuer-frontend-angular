@@ -1,15 +1,19 @@
-<mat-card [routerLink]="['../' + pathDetail, publication.id]" *ngIf="publication" class="publication-card-container">
-  <mat-card-header>
-    <mat-card-title>{{publication.title}}</mat-card-title>
-    <mat-card-subtitle>Perro</mat-card-subtitle>
-  </mat-card-header>
-  <img id="post-image" mat-card-image [src]="getUrlImage()" [alt]="publication.title">
-  <mat-card-content>
-    <p>
-      {{publication.description}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-
+<mat-card *ngIf="post" class="publication-card-container">
+  <div [routerLink]="['../' + pathDetail, post.id]">
+    <mat-card-header>
+      <mat-card-title>{{post.title}}</mat-card-title>
+      <mat-card-subtitle>Perro</mat-card-subtitle>
+    </mat-card-header>
+    <img id="post-image" mat-card-image [src]="getUrlImage()" [alt]="post.title">
+    <mat-card-content>
+      <p>
+        {{post.description}}
+      </p>
+    </mat-card-content>
+  </div>
+  <mat-card-actions *ngIf="isAdmin && post.state != postStates.Draft">
+    <button *ngIf="post.state === postStates.PendingReview" type="button" (click)="toPublish()" mat-flat-button color="primary">Aceptar</button>
+    <button *ngIf="post.state === postStates.PendingReview" type="button" (click)="toRejectState()" mat-flat-button color="warn">Rechazar</button>
+    <button *ngIf="post.state === postStates.Rejected" type="button" (click)="toRevision()" mat-flat-button color="warn">Revision</button>
   </mat-card-actions>
 </mat-card>
