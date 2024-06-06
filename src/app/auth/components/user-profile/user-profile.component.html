@@ -1,0 +1,41 @@
+<div class="profile-container">
+    <form [formGroup]="form" (ngSubmit)="submit($event)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Perfil</mat-card-title>
+          <mat-card-subtitle>Ingrese los datos de su perfil</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="name && name.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="lastName" required>
+            <mat-error *ngIf="lastName && lastName.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error *ngIf="email && email.errors?.['required']">Requerido</mat-error>
+          </mat-form-field>          
+  
+          <app-upload-file [urlBase]="urlUploads" 
+          (fileUploaded)="onFileUploaded($event)"></app-upload-file>
+
+          <img class="miniature-image" *ngIf="image && image !== ''" src={{getUrlImage()}} alt="Imagen usuario">
+
+          <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
+  
+        </mat-card-content>
+        <mat-card-actions>
+  
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>

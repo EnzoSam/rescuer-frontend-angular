@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
 
       console.log(response)
       this._authService.rememberUser
-      (this.login.email, response.token);
+      (this.login.email, response.token, response.userId);
       this._router.navigate(['../home']);
 
     }).catch(error => {

@@ -9,6 +9,7 @@ import { IResult } from '../../shared/interfaces/basicResult.interface';
 import { IAuthentication } from '../../shared/interfaces/authentication.interface';
 import { UiService } from '../../shared/services/ui.service';
 import { IBasicResponse } from '../../core/interfaces/responses/basicresponse.interface';
+import { IUser } from '../interfaces/iuser.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,17 @@ export class AuthService extends BaseNoAuthService {
           auth.roles = roles;
         })
       });
+  }
+
+  newUser(): IUser {
+    return {
+      id:'',
+      name: '',
+      lastName: '',
+      email: '',
+      image:'',
+      contacts:[]
+    };
   }
 
   newLogin(): ILogin {
@@ -93,11 +105,12 @@ export class AuthService extends BaseNoAuthService {
     });
   }
 
-  rememberUser(userName:string, token:string)
+  rememberUser(userName:string, token:string, userId:string)
   {
       let auth:IAuthentication = {
         userName,
         token,
+        userId,
         roles:[]
       };
       console.log(auth);
@@ -174,4 +187,18 @@ export class AuthService extends BaseNoAuthService {
         );
     });
   }    
+
+  updateUser(_user:IUser): Promise<IBasicResponse> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.put<IBasicResponse>
+      (this.getBaseUrlNameSpace(), _user)
+        .subscribe((response:IBasicResponse) => {
+          resolve(response);
+        },
+          error => {
+            reject({ statusCode: 500, message: error })
+          }
+        );
+    });
+  }  
 }
