@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyEmailInfoComponent } from './components/verify-email-info/verify-email-info.component';
 import { ValidateEmailComponent } from './components/validate-email/validate-email.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 export const AuthRoutes: Routes = [
@@ -19,6 +19,7 @@ export const AuthRoutes: Routes = [
   { path: 'verify', pathMatch:'full', component: VerifyEmailInfoComponent },
   { path: 'verify/:reset', component: VerifyEmailInfoComponent },
   { path: 'validate/:email/:token', component: ValidateEmailComponent },
-  { path: 'reset/:email/:token', component: NewPasswordComponent }
+  { path: 'reset/:email/:token', component: NewPasswordComponent },
+  { path: 'profile', component: UserProfileComponent }
 ];
 
