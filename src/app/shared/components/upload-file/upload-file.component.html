@@ -1,10 +1,12 @@
 <form [formGroup]="imageForm">
+    <label for="file">Seleccionar imagen</label>
     <input
         type="file"
         id="file"
         placeholder="File"
         (change)="onFileSelected($event)"
         #fileInput 
-        formControlName="file">
+        formControlName="file"
+        style="display: none;">
 </form>
 

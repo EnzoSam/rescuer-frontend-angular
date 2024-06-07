@@ -1,12 +1,12 @@
 import { IAtribute } from "../../admin/interfaces/iatribute.interface";
-import { IPost } from "../interfaces/post.interface";
 
 export class Animal
 {
     id:any
     name:string
     userId:string
-    image?:string    
+    lost:boolean
+    image?:string        
     description?:string
     atributesModels:IAtribute[]
     atributes:any[]
@@ -17,6 +17,7 @@ export class Animal
         this.userId = _userId;
         this.atributesModels = [];
         this.atributes = [];
+        this.lost = false;
     }    
 
     setAtribute(_group:string, _atribute:IAtribute)

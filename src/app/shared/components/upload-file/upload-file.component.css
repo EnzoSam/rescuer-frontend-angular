@@ -1,0 +1,11 @@
+label[for="file"] {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  label[for="file"]:hover {
+    background-color: #eee;
+  }  

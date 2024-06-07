@@ -109,8 +109,7 @@ export class AuthService extends BaseNoAuthService {
   {
       let auth:IAuthentication = {
         userName,
-        token,
-        userId,
+        token,        
         roles:[]
       };
       console.log(auth);
@@ -173,6 +172,20 @@ export class AuthService extends BaseNoAuthService {
         );
     });
   }    
+
+  getByUserEmail(_email:any): Promise<IBasicResponse> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.get<IBasicResponse>
+      (this.getBaseUrlNameSpace() + 'byemail/' + _email)
+        .subscribe((response:IBasicResponse) => {
+          resolve(response);
+        },
+          error => {
+            reject({ statusCode: 500, message: error })
+          }
+        );
+    });
+  } 
 
   getRoles(): Promise<number[]> {
     return new Promise((resolve, reject) => {

@@ -61,9 +61,8 @@ export class LoginComponent implements OnInit {
     this.login.password = this.password.value + '';
     this._authService.login(this.login).then(response => {
 
-      console.log(response)
       this._authService.rememberUser
-      (this.login.email, response.token, response.userId);
+      (this.login.email, response.data, response.userId);
       this._router.navigate(['../home']);
 
     }).catch(error => {

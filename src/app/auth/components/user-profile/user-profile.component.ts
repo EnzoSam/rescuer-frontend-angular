@@ -37,7 +37,7 @@ export class UserProfileComponent {
     private _uiService:UiService,
     private _activateRoute:ActivatedRoute)
   {
-    this.urlUploads = Backend.UploadsUrl + 'users/uploads';
+    this.urlUploads = Backend.UploadsUrl + 'auth/uploads';
     this.user = this._userService.newUser();
     this.form = new FormGroup({
       name : new FormControl('', [Validators.required]),
@@ -54,9 +54,8 @@ export class UserProfileComponent {
     e.preventDefault();
 
     this.user.name  = this.form.value.name;
-    this.user.lastName  = this.form.value.lastName;
-    this.user.email = this.form.value.lastName;
-    
+    this.user.lastName  = this.form.value.lastName;    
+    this.user.image = this.image;
     this._userService.updateUser(this.user)
     .then((response:IBasicResponse) => {
       
@@ -69,16 +68,16 @@ export class UserProfileComponent {
 
   ngOnInit(): void {
   
-    let {userId} = this._uiService.getAuthentication();
-    if(userId)
-      this.load(userId);
+    let {userName} = this._uiService.getAuthentication();
+    if(userName)
+      this.load(userName);
   }
 
-  load(id:any)
+  load(_userName:any)
   {
-    this._userService.getById(id)
+    this._userService.getByUserEmail(_userName)
     .then((response:IBasicResponse)=>
-    {
+    {      
       this.user = response.data;
       this.image = this.user.image
       this.form.patchValue({
