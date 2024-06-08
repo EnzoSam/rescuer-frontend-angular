@@ -14,6 +14,7 @@ import { FiltersDefaults } from "../constants/filters.constants";
             pageFrom:FiltersDefaults.PageFrom,
             pageTo:FiltersDefaults.PageTo,
             state:PostStates.Published,
+            lost:false,
             atributes:[]  
         }
     }

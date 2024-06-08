@@ -23,7 +23,7 @@ export class SelectNameComponent {
   constructor()
   {
     this.form = new FormGroup({
-      name : new FormControl('', [Validators.required]),
+      name : new FormControl(''),
     });   
   }
   

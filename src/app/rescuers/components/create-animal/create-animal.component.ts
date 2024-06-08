@@ -57,7 +57,7 @@ export class CreateAnimalComponent {
   isLinear = false;
   @ViewChild('stepper') private myStepper!: MatStepper;
 
-  animal:Animal;
+  animal:Animal;  
 
   constructor(private _formBuilder: FormBuilder,
     private _animalService:AnimalService,

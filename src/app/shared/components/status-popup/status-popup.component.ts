@@ -5,11 +5,12 @@ import { UiService } from '../../services/ui.service';
 import { Subscription, interval } from 'rxjs';
 import { AppComponent } from '../../../app.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-status-popup',
   standalone: true,
-  imports: [CommonModule,MatChipsModule],
+  imports: [CommonModule, MatChipsModule,MatButtonModule],
   templateUrl: './status-popup.component.html',
   styleUrl: './status-popup.component.css'
 })
@@ -18,17 +19,23 @@ export class StatusPopupComponent implements OnInit, OnDestroy {
   status?: IStatus
   statusSuscription: Subscription;
   intervalSubscription?: Subscription;
+  color: string;
 
   constructor(private _uiService: UiService,
     private _appComponent: AppComponent) {
 
+    this.color = 'accent';
     this.statusSuscription = _uiService.onSiteStatusChanged().subscribe
-      ((_status: IStatus) => {        
+      ((_status: IStatus) => {
         if (this.intervalSubscription)
           this.hide();
 
-        this.show();        
+        this.show();
         this.status = _status;
+        if(this.status.code >= 200 && this.status.code <300)
+          this.color = 'accent';
+        else
+          this.color = 'warn';
         console.log(_status)
         this.intervalSubscription = interval(3000)
           .subscribe(x => { this.hide(); });
@@ -57,8 +64,7 @@ export class StatusPopupComponent implements OnInit, OnDestroy {
     }
   }
 
-  show()
-  {
+  show() {
     (document.getElementsByTagName("app-status-popup")[0] as HTMLElement).style.display = 'flex';
   }
 }

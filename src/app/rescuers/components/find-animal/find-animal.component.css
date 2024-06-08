@@ -58,3 +58,22 @@ mat-drawer-container
     min-height: 100%;
     min-width: 100%;
 }
+
+.publication-header
+{
+    display: flex;
+    flex-direction: row;
+    padding-right: 55px;
+    margin-bottom: 20px;
+}
+
+.list-title
+{
+    flex-grow: 1;
+}
+
+h1
+{
+    flex-grow: 1;
+    text-align: center;
+}

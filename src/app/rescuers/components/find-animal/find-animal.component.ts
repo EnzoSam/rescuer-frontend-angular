@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink } from '@angular/router';
+import { FilterService } from '../../services/filter.service';
 
 @Component({
     selector: 'app-find-animal',
@@ -19,21 +21,37 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     styleUrl: './find-animal.component.css',
     imports: [CommonModule, MatButtonModule,FindFilterPanelComponent, 
         FindAnimalListComponent,MatIconModule,
-        MatSlideToggleModule,MatSidenavModule]
+        MatSlideToggleModule,MatSidenavModule,RouterLink]
 })
 export class FindAnimalComponent implements OnInit{
 
     posts:IPost[] = [];
     filterOpened:boolean = true;
-    lastFilter?:IFilter;
-    
+    lastFilter:IFilter;
+    lostMode:boolean = false;
+    title:string;
+
     constructor(private _postService:PostService,
-        private _uiService:UiService)
+        private _uiService:UiService,
+        private _activatedRoute:ActivatedRoute,
+        private _filterService:FilterService)
     {
-        
+        this.title = 'Encontrá a tu nueva mascota'
+        this.lastFilter = _filterService.new();        
     }
     ngOnInit(): void {
-       this.onFilterChanged(undefined);
+
+        if(this._activatedRoute.data)
+        {
+            let {lost} = this._activatedRoute.snapshot.data;
+            if(lost)
+            {
+                this.lostMode = lost;
+                if(this.lostMode)
+                    this.title = 'Mascotas extraviadas'
+            }
+        }
+        this.onFilterChanged(this.lastFilter);
     }
 
     refresh()
@@ -41,13 +59,17 @@ export class FindAnimalComponent implements OnInit{
         this.onFilterChanged(this.lastFilter);
     }
 
-    onFilterChanged(filter:IFilter | undefined)
+    onFilterChanged(filter:IFilter)
     {
+        filter.lost = this.lostMode;
         this.lastFilter = filter;
+        console.log(filter)
         this._postService.filter(filter)
         .then((response:IBasicResponse)=>
         {
           this.posts = response.data;
+          if(!this.posts || this.posts.length === 0)
+            this._uiService.setNewMessageStatus('Sin resultados',{});
         })
         .catch(error=>
           {

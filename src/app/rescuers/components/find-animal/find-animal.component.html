@@ -21,12 +21,17 @@
         </mat-icon>
 
         <section id="list">
+            <div class="publication-header">
+                <h1 class="list-title">{{title}}</h1>
+                <button *ngIf="!lostMode" routerLink="../create" mat-raised-button color="primary">Publicar</button>
+                <button *ngIf="lostMode" routerLink="../create-lost" mat-raised-button color="primary">Publicar</button>
+            </div>            
             <app-find-animal-list 
             (postStateChanged)="refresh()"
             [posts]="posts" class="animal-list">
             </app-find-animal-list>
             <div class="publications-footer">
-                <button mat-button color="primary">Cargar más</button>
+                <button *ngIf="posts && posts.length > 0" mat-button color="primary">Cargar más</button>
             </div>
         </section>
 
