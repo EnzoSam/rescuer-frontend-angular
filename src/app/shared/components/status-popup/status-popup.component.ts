@@ -36,7 +36,6 @@ export class StatusPopupComponent implements OnInit, OnDestroy {
           this.color = 'accent';
         else
           this.color = 'warn';
-        console.log(_status)
         this.intervalSubscription = interval(3000)
           .subscribe(x => { this.hide(); });
       },

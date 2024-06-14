@@ -15,4 +15,11 @@ export class ContactService  {
       }
     }
 
+    getByType(_contacts:IContact[], _type:string):string
+    {
+        if(!_contacts) return '';
+
+        let cr = _contacts.find(c=>c.type === _type);
+        return cr != null? cr.contact:'';
+    }
 }

@@ -5,17 +5,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UploadableFile } from '../../interfaces/uploadableFile';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../services/ui.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-upload-file',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,MatCardModule],
   templateUrl: './upload-file.component.html',
   styleUrl: './upload-file.component.css'
 })
 export class UploadFileComponent {
 
   @Input() urlBase: string;
+  @Input() avatarUrl?: string;
+  @Input() avatarMode: boolean = false;
   @Output() fileUploaded = new EventEmitter<UploadableFile>();
 
   uploatedImageUrl: string;

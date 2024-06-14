@@ -9,3 +9,9 @@ mat-card
 {
     padding: 10px;
 }
+
+button
+{
+    max-width: 30px;
+    max-height: 30px;
+}

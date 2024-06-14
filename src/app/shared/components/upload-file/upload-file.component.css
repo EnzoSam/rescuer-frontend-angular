@@ -1,4 +1,4 @@
-label[for="file"] {
+#btnUpload{
     display: inline-block;
     padding: 8px 15px;
     margin: 5px;
@@ -6,6 +6,12 @@ label[for="file"] {
     cursor: pointer;
   }
 
-  label[for="file"]:hover {
+#btnUpload:hover {
     background-color: #eee;
   }  
+
+img
+{
+  cursor: pointer;
+  object-fit: cover;
+}

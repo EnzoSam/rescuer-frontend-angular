@@ -1,24 +1,62 @@
-.profile-container{
- 
-    display:  flex;
-    flex-direction: column;
+.profile-container {
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.names-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#name,
+#lastname {
+  min-width: 45%;
+}
+
+#whatsapp {
+  width: 45%;
+}
+
+@media (max-width: 600px) {
+
+  .profile-container {
+    padding: 0;
+  }
+
+  mat-card {
     width: 100%;
-    height: calc(100vh - 80px);
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;    
-}
+  }
 
-mat-card
-{
-    width: 400px;
-}
+  form {
+    width: 100%;
+  }
 
-mat-card-content{
-    display: flex;
-    flex-direction: column;
-}
+  mat-form-field {
+    min-width: 100%;
+  }
 
-.miniature-image{
-    max-width: 100px;
+  #name,
+  #lastname {
+    min-width: 100%;
+  }
 }

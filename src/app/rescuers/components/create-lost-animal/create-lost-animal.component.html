@@ -5,10 +5,25 @@
             <mat-card-subtitle>Ingrese los datos del animal extraviado</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-
-          <form action="" (ngSubmit)="submit($event)">
-
-              <button mat-raised-button color="primary">Publicar</button>
+            <form [formGroup]="form" (ngSubmit)="submit($event)">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="name && name.errors?.['required']">Requerido</mat-error>
+              </mat-form-field>
+      
+              <mat-form-field appearance="fill">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput  formControlName="description"></textarea>                
+                <mat-error *ngIf="description && description.errors?.['required']">Requerido</mat-error>
+              </mat-form-field>
+      
+              <app-upload-file [urlBase]="urlUploads" 
+              (fileUploaded)="onFileUploaded($event)"></app-upload-file>
+    
+              <img class="miniature-image" *ngIf="image && image !== ''" src={{getUrlImage()}} alt="Imagen atributo">
+    
+              <button  [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
             </form>
         </mat-card-content>
         <mat-card-actions>

@@ -15,13 +15,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UploadFileComponent } from '../../../shared/components/upload-file/upload-file.component';
+import { ContactsCreatorComponent } from '../../../shared/components/contacts-creator/contacts-creator.component';
+import { IContact } from '../../../admin/interfaces/icontact.interface';
+import { ContactService } from '../../../shared/services/contact.service';
+import { whatsappValidator } from '../../../shared/validators/whatsapp.validator';
+import { ContactsType } from '../../../shared/constants/contact.constant';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule,
     MatInputModule, FormsModule, ReactiveFormsModule, 
-    MatIconModule, MatButtonModule,UploadFileComponent],
+    MatIconModule, MatButtonModule,UploadFileComponent,
+  ContactsCreatorComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
@@ -30,25 +36,26 @@ export class UserProfileComponent {
   form:FormGroup;
   user:IUser;
   urlUploads:string;
-  image = '';
+  image = '';  
 
   constructor(private _userService:AuthService,
     private _router:Router,
     private _uiService:UiService,
-    private _activateRoute:ActivatedRoute)
+    private _activateRoute:ActivatedRoute,
+  private _contactService:ContactService)
   {
     this.urlUploads = Backend.UploadsUrl + 'auth/uploads';
     this.user = this._userService.newUser();
     this.form = new FormGroup({
       name : new FormControl('', [Validators.required]),
       lastName : new FormControl('', [Validators.required]),
-      email : new FormControl('', [Validators.required]),
+      whatsapp : new FormControl('', [whatsappValidator()])
     });      
   }
 
   get name() { return this.form.get('name'); }
   get lastName() { return this.form.get('lastName'); }
-  get email() { return this.form.get('email'); }
+  get whatsapp() { return this.form.get('whatsapp'); }
   
   submit(e: any): void {
     e.preventDefault();
@@ -56,6 +63,7 @@ export class UserProfileComponent {
     this.user.name  = this.form.value.name;
     this.user.lastName  = this.form.value.lastName;    
     this.user.image = this.image;
+    this._userService.addWhatsappContact(this.user, this.form.value.whatsapp);
     this._userService.updateUser(this.user)
     .then((response:IBasicResponse) => {
       
@@ -83,10 +91,16 @@ export class UserProfileComponent {
       this.form.patchValue({
         name: this.user.name,
         lastName: this.user.lastName,
-        image: this.user.image,
-        email: this.user.email
+        whatsapp: this._contactService.getByType
+        (this.user.contacts, ContactsType.Whatsapp),
+        image: this.user.image
         });
 
+        if(!this.user.contacts || this.user.contacts.length === 0)
+          {
+            this.user.contacts = []
+            this.user.contacts.push(this._contactService.new());
+          }
     }).catch(error => {
       this._uiService.setNewErrorStatus(error.message, error);
     });
@@ -101,4 +115,9 @@ export class UserProfileComponent {
   {
     return Backend.ResourcesUrl + 'users/' + this.image;
   }
+
+  onContactChanged(_contacts:IContact[])
+  {
+    this.user.contacts = _contacts;
+  }  
 }

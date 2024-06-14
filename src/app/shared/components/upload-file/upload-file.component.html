@@ -1,5 +1,8 @@
 <form [formGroup]="imageForm">
-    <label for="file">Seleccionar imagen</label>
+    <label id="btnUpload" *ngIf="!avatarMode" for="file">Seleccionar imagen</label>
+    <label *ngIf="avatarMode" for="file">
+    <img mat-card-avatar [src]="avatarUrl" alt="">
+    </label>
     <input
         type="file"
         id="file"

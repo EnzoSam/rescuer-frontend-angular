@@ -10,6 +10,8 @@ import { IAuthentication } from '../../shared/interfaces/authentication.interfac
 import { UiService } from '../../shared/services/ui.service';
 import { IBasicResponse } from '../../core/interfaces/responses/basicresponse.interface';
 import { IUser } from '../interfaces/iuser.interface';
+import { ContactsType } from '../../shared/constants/contact.constant';
+import { ContactService } from '../../shared/services/contact.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,29 +19,28 @@ import { IUser } from '../interfaces/iuser.interface';
 export class AuthService extends BaseNoAuthService {
 
   constructor(protected override _httpClient: HttpClient,
-    private _iuService:UiService) {
+    private _iuService: UiService,
+    private _contactService: ContactService) {
     super(_httpClient);
     this.nameSpace = 'auth';
 
     _iuService.onAccountStatusChange().subscribe
-    ((auth:IAuthentication)=>
-      {
+      ((auth: IAuthentication) => {
         this.getRoles().then
-        ((roles:number[])=>
-        {
-          auth.roles = roles;
-        })
+          ((roles: number[]) => {
+            auth.roles = roles;
+          })
       });
   }
 
   newUser(): IUser {
     return {
-      id:'',
+      id: '',
       name: '',
       lastName: '',
       email: '',
-      image:'',
-      contacts:[]
+      image: '',
+      contacts: []
     };
   }
 
@@ -65,7 +66,7 @@ export class AuthService extends BaseNoAuthService {
   initRegister(register: IRegister): Promise<IInitRegisterResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.post<IInitRegisterResponse>
-      (this.getBaseUrlNameSpace() + "no-auth/register", register)
+        (this.getBaseUrlNameSpace() + "no-auth/register", register)
         .subscribe(response => {
           resolve(response);
         },
@@ -79,7 +80,7 @@ export class AuthService extends BaseNoAuthService {
   login(login: ILogin): Promise<ILoginResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.post<ILoginResponse>
-      (this.getBaseUrlNameSpace() + "no-auth/login", login)
+        (this.getBaseUrlNameSpace() + "no-auth/login", login)
         .subscribe(response => {
           resolve(response);
         },
@@ -94,7 +95,7 @@ export class AuthService extends BaseNoAuthService {
     return new Promise((resolve, reject) => {
       let validation = { email, token };
       this._httpClient.post<IResult>
-      (this.getBaseUrlNameSpace() + "no-auth/confirm-email", validation)
+        (this.getBaseUrlNameSpace() + "no-auth/confirm-email", validation)
         .subscribe(response => {
           resolve(response);
         },
@@ -105,20 +106,18 @@ export class AuthService extends BaseNoAuthService {
     });
   }
 
-  rememberUser(userName:string, token:string, userId:string)
-  {
-      let auth:IAuthentication = {
-        userName,
-        token,        
-        roles:[]
-      };
-      console.log(auth);
-      localStorage.setItem('auth', JSON.stringify(auth));
-      this._iuService.loadAuthentication();
+  rememberUser(userName: string, token: string, userId: string) {
+    let auth: IAuthentication = {
+      userName,
+      token,
+      roles: []
+    };
+    console.log(auth);
+    localStorage.setItem('auth', JSON.stringify(auth));
+    this._iuService.loadAuthentication();
   }
 
-  logOut()
-  {    
+  logOut() {
     localStorage.removeItem('auth');
     this._iuService.clearAuth();
   }
@@ -126,10 +125,10 @@ export class AuthService extends BaseNoAuthService {
   requestResetPassword(email: string): Promise<IResult> {
     return new Promise((resolve, reject) => {
       this._httpClient.post<IResult>
-      (this.getBaseUrlNameSpace() + "no-auth/request-reset-password",
-      {
-        email
-      })
+        (this.getBaseUrlNameSpace() + "no-auth/request-reset-password",
+          {
+            email
+          })
         .subscribe(response => {
           resolve(response);
         },
@@ -140,7 +139,7 @@ export class AuthService extends BaseNoAuthService {
     });
   }
 
-  changePassword(email: string, token:string, newPassword:string): Promise<IResult> {
+  changePassword(email: string, token: string, newPassword: string): Promise<IResult> {
     return new Promise((resolve, reject) => {
 
       let req = {
@@ -148,7 +147,7 @@ export class AuthService extends BaseNoAuthService {
       };
 
       this._httpClient.post<IResult>
-      (this.getBaseUrlNameSpace() + "no-auth/change-password",req)
+        (this.getBaseUrlNameSpace() + "no-auth/change-password", req)
         .subscribe(response => {
           resolve(response);
         },
@@ -157,13 +156,13 @@ export class AuthService extends BaseNoAuthService {
           }
         );
     });
-  }  
+  }
 
-  getById(_id:any): Promise<IBasicResponse> {
+  getById(_id: any): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<IBasicResponse>
-      (this.getBaseUrlNameSpace() + '' + _id)
-        .subscribe((response:IBasicResponse) => {
+        (this.getBaseUrlNameSpace() + '' + _id)
+        .subscribe((response: IBasicResponse) => {
           resolve(response);
         },
           error => {
@@ -171,13 +170,13 @@ export class AuthService extends BaseNoAuthService {
           }
         );
     });
-  }    
+  }
 
-  getByUserEmail(_email:any): Promise<IBasicResponse> {
+  getByUserEmail(_email: any): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<IBasicResponse>
-      (this.getBaseUrlNameSpace() + 'byemail/' + _email)
-        .subscribe((response:IBasicResponse) => {
+        (this.getBaseUrlNameSpace() + 'byemail/' + _email)
+        .subscribe((response: IBasicResponse) => {
           resolve(response);
         },
           error => {
@@ -185,13 +184,13 @@ export class AuthService extends BaseNoAuthService {
           }
         );
     });
-  } 
+  }
 
   getRoles(): Promise<number[]> {
     return new Promise((resolve, reject) => {
       this._httpClient.get<IBasicResponse>
-      (this.getBaseUrlNameSpace() + 'roles' )
-        .subscribe((response:IBasicResponse) => {
+        (this.getBaseUrlNameSpace() + 'roles')
+        .subscribe((response: IBasicResponse) => {
           resolve(response.data);
         },
           error => {
@@ -199,13 +198,13 @@ export class AuthService extends BaseNoAuthService {
           }
         );
     });
-  }    
+  }
 
-  updateUser(_user:IUser): Promise<IBasicResponse> {
+  updateUser(_user: IUser): Promise<IBasicResponse> {
     return new Promise((resolve, reject) => {
       this._httpClient.put<IBasicResponse>
-      (this.getBaseUrlNameSpace(), _user)
-        .subscribe((response:IBasicResponse) => {
+        (this.getBaseUrlNameSpace(), _user)
+        .subscribe((response: IBasicResponse) => {
           resolve(response);
         },
           error => {
@@ -213,5 +212,24 @@ export class AuthService extends BaseNoAuthService {
           }
         );
     });
-  }  
+  }
+
+  addWhatsappContact(_user: IUser, _whatsapp: string) {
+    if (!_user.contacts)
+      _user.contacts = [];
+
+    let wc = _user.contacts.find(c => c.type === ContactsType.Whatsapp);
+    if (wc) {
+      if(!_whatsapp || _whatsapp === '')
+        _user.contacts = _user.contacts.filter(c=>c!=wc);
+      else
+        wc.contact = _whatsapp;
+    }
+    else if(_whatsapp && _whatsapp !== ''){
+      wc = this._contactService.new();
+      wc.type = ContactsType.Whatsapp;
+      wc.contact = _whatsapp;
+      _user.contacts.push(wc);
+    }
+  }
 }

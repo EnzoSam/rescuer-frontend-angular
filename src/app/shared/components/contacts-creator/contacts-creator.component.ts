@@ -43,6 +43,8 @@ export class ContactsCreatorComponent implements OnInit{
   onContactRemove(contact:IContact)
   {
     this.contacts = this.contacts?.filter(c=>c!== contact);
+    if(this.contacts?.length == 0)
+        this.contacts.push(this._contactService.new());
     this.onContactsChanged.emit(this.contacts);
   }
 }
