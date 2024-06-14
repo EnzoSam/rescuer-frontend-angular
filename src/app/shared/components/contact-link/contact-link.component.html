@@ -1,0 +1,7 @@
+@if (contact){
+
+    @if(contact.type == contactsType.Whatsapp)
+    {
+        <a [href]="'https://wa.me/549' + contact.contact">{{contact.contact}}</a>
+    }
+}
