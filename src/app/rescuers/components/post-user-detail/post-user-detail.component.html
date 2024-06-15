@@ -1,14 +1,18 @@
 <div class="detail-container">
     <mat-card>
         <mat-card-header>
-            <h2>Usuario: {{' ' + user?.name}}</h2>
+            <h2>Usuario: {{ user?.name || ''}}</h2>
         </mat-card-header>
         @if(userDataVisible)
         {
             <mat-card-content>
                 <div class="contacts">
                     @for (c of user?.contacts; track c.contact) {
-                    <app-contact-link [contact]="c"></app-contact-link>
+                    <app-contact-link 
+                    [contact]="c"
+                    [textToSend]="getPublicationContactText()">
+
+                    </app-contact-link>
                     }
                 </div>
             </mat-card-content>

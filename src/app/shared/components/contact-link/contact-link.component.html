@@ -2,6 +2,15 @@
 
     @if(contact.type == contactsType.Whatsapp)
     {
-        <a [href]="'https://wa.me/549' + contact.contact">{{contact.contact}}</a>
+        <a target="_blank"
+        [href]="'https://wa.me/549' + contact.contact + '?text='+textToSend" >
+            {{contact.contact}}
+        </a>
+    }
+    @else if(contact.type == contactsType.Mail)
+    {
+        <a [href]="'mailto:' +contact.contact + '?subject=Adopción animal&body=' + textToSend">
+            {{contact.contact}}
+        </a>
     }
 }

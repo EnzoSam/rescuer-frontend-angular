@@ -13,5 +13,7 @@ import { ContactsType } from '../../constants/contact.constant';
 export class ContactLinkComponent {
 
   @Input() contact?:IContact
+  @Input() textToSend:string = '';
   contactsType=ContactsType;
+
 }
