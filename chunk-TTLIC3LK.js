@@ -1,0 +1,1 @@
+import{m as o}from"./chunk-MWYAYKLC.js";import{N as e,wb as i}from"./chunk-6X42ZUM2.js";var h=(r,n)=>{let t=e(o),u=e(i);if(!t.isAuthenticated())return u.navigate(["/auth"]),!1;if(r.data){let{expectedRole:a}=r.data;if(a&&!t.getAuthentication().roles.includes(a))return t.setNewErrorStatus("No autorizado",{}),!1}return!0};export{h as a};
