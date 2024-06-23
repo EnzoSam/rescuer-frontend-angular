@@ -1,0 +1,25 @@
+<div class="caregiver-container">
+  <form [formGroup]="form" (ngSubmit)="submit($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Cuidador</mat-card-title>
+        <mat-card-subtitle>Este es tu perfil como cuidador</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Presentación</mat-label>
+          <textarea formControlName="presentation" matInput placeholder="Presentese como cuidador">
+          </textarea>
+          <mat-error *ngIf="presentation && presentation.errors?.['required']">Requerido</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="!form.valid" mat-raised-button color="primary">Guardar</button>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

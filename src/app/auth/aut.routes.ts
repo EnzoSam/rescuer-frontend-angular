@@ -6,6 +6,8 @@ import { ValidateEmailComponent } from './components/validate-email/validate-ema
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthPaths } from './constants/authPath.constant';
+import { CaregiverProfileComponent } from './components/caregiver-profile/caregiver-profile.component';
 
 
 export const AuthRoutes: Routes = [
@@ -20,6 +22,7 @@ export const AuthRoutes: Routes = [
   { path: 'verify/:reset', component: VerifyEmailInfoComponent },
   { path: 'validate/:email/:token', component: ValidateEmailComponent },
   { path: 'reset/:email/:token', component: NewPasswordComponent },
-  { path: 'profile', component: UserProfileComponent }
+  { path: 'profile', component: UserProfileComponent },
+  { path:AuthPaths.CaregiverDetail, component:CaregiverProfileComponent}
 ];
 

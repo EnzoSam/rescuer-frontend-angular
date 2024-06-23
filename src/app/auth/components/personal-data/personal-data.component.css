@@ -1,0 +1,51 @@
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .names-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  #name,
+  #lastname {
+    min-width: 45%;
+  }
+  
+  #whatsapp {
+    width: 45%;
+  }
+  
+  @media (max-width: 600px) {
+  
+    .profile-container {
+      padding: 0;
+    }
+  
+    mat-card {
+      width: 100%;
+    }
+  
+    form {
+      width: 100%;
+    }
+  
+    mat-form-field {
+      min-width: 100%;
+    }
+  
+    #name,
+    #lastname {
+      min-width: 100%;
+    }
+  }

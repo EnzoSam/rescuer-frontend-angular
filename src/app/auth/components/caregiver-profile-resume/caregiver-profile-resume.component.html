@@ -1,0 +1,16 @@
+<mat-card class="resume-container">
+    <div *ngIf="!caregiver">
+        <p>
+            No tienes un perfil cuidador
+        </p> 
+        <button mat-raised-button [routerLink]="'../' + paths.CaregiverDetail">
+            Crear perfil cuidador
+        </button>
+    </div>
+    <div *ngIf="caregiver">
+        Tu perfil de cuidador está activo
+        <button mat-raised-button [routerLink]="'../' + paths.CaregiverDetail">
+            Administrar perfil cuidador
+        </button>        
+    </div>
+</mat-card>

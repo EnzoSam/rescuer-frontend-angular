@@ -1,42 +1,6 @@
 <div class="profile-container">
-  <form [formGroup]="form" (ngSubmit)="submit($event)">
-    <mat-card>
-      <mat-card-header>
-
-        <app-upload-file mat-card-avatar [urlBase]="urlUploads" [avatarMode]="true" [avatarUrl]="getUrlImage()"
-          (fileUploaded)="onFileUploaded($event)">
-        </app-upload-file>
-        <mat-card-title>Perfil</mat-card-title>
-        <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-
-        <div class="names-container">
-          <mat-form-field id="name" appearance="fill">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="name" required>
-            <mat-error *ngIf="name && name.errors?.['required']">Requerido</mat-error>
-          </mat-form-field>
-
-          <mat-form-field id="lastname" appearance="fill">
-            <mat-label>Apellido</mat-label>
-            <input matInput formControlName="lastName" required>
-            <mat-error *ngIf="lastName && lastName.errors?.['required']">Requerido</mat-error>
-          </mat-form-field>
-        </div>
-
-        <mat-form-field id="whatsapp" appearance="fill">
-          <mat-label>Whatsapp</mat-label>
-          <input type="number" matInput formControlName="whatsapp">
-          <mat-error *ngIf="whatsapp && whatsapp.errors?.['invalidWhatsApp']">Número no válido</mat-error>
-        </mat-form-field>
-
-      </mat-card-content>
-      <mat-card-actions [align]="'end'">
-        <button [disabled]="!form.valid" mat-raised-button color="primary">
-          Guardar cambios
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
+  <app-personal-data></app-personal-data>
+  <app-caregiver-profile-resume></app-caregiver-profile-resume>
 </div>
+
+
