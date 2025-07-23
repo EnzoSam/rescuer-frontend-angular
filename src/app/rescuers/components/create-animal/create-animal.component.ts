@@ -118,4 +118,8 @@ export class CreateAnimalComponent {
       }
     )
   }
+  isValid():boolean
+  {
+    return this.animal.isValid();
+  }
 }

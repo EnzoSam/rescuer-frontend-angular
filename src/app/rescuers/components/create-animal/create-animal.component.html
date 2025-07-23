@@ -29,7 +29,8 @@
 
         </p>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-flat-button color="primary" (click)="onSubmit()">Finalizar</button>
+        <button mat-flat-button color="primary"  [disabled]="!isValid()"
+        (click)="onSubmit()">Finalizar</button>
       </div>
     </mat-step>
   </mat-stepper>
