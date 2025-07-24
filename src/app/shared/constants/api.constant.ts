@@ -4,7 +4,7 @@ export const Backend =
     UploadsUrl : 'https://rescuers-api-ts.vercel.app/api/',
     ResourcesUrl:'https://storage.googleapis.com/rescuers-e684f.appspot.com/'
 }
-
+ 
 /*
 export const Backend =
 {
