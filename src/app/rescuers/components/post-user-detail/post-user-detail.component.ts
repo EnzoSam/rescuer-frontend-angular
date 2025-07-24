@@ -9,11 +9,13 @@ import { ContactLinkComponent } from '../../../shared/components/contact-link/co
 import { Location } from '@angular/common';
 import { ContactService } from '../../../shared/services/contact.service';
 import { ContactsType } from '../../../shared/constants/contact.constant';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-post-user-detail',
   standalone: true,
-  imports: [CommonModule,MatCardModule,MatButtonModule,ContactLinkComponent],
+  imports: [CommonModule, MatCardModule,
+     MatButtonModule, ContactLinkComponent, MatIconModule],
   templateUrl: './post-user-detail.component.html',
   styleUrl: './post-user-detail.component.css'
 })
@@ -21,24 +23,25 @@ export class PostUserDetailComponent implements OnInit{
 
   @Input() userId?:any;
   user?:IUser;
-  userDataVisible:boolean;
+  userDataVisible:boolean = true;
+  loading = false;
+
   constructor(private _authService:AuthService,
     private _contactService:ContactService,
     private location: Location, 
     @Inject(DOCUMENT) private document: Document
   )
   {
-      this.userDataVisible = false;
   }
   ngOnInit(): void {
     
-    console.log(this.userId)
     if(this.userId)
     {
+      this.loading = true;
       this._authService.getById(this.userId)
       .then((respone:IBasicResponse)=>
-      {
-        console.log(respone)
+      {    
+        this.loading = false;    
         this.user = respone.data; 
         if(this.user)
           {

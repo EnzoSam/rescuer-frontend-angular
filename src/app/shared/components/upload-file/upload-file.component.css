@@ -15,3 +15,21 @@ img
   cursor: pointer;
   object-fit: cover;
 }
+
+.upload-spinner-container{
+display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disabled-label {
+  opacity: 0.6; 
+  cursor: not-allowed; 
+  pointer-events: none; 
+}
+
+.disabled-avatar {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(100%); 
+}

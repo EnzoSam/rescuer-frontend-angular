@@ -1,6 +1,9 @@
 <nav>
     <mat-toolbar color="primary">
-        <h1 class="app-title" routerLink="home">Mascovita Rescates</h1>
+        <a [routerLink]="['/home']" class="logo-link">
+        <img src="assets/logo-comunidad-mascovita.webp" alt="Logo Comunidad Mascovita">        
+        <h1 class="app-title">Comunidad Mascovita</h1>
+        </a>
         <div class="lg-menu">
             <button mat-button routerLink="home">Inicio</button>
             <button mat-button routerLink="publications">Adopcion</button>

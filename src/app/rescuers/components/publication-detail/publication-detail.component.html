@@ -1,18 +1,62 @@
-<div *ngIf="post" class="publication-detail-container">
-    <div class="animal-data-container">
-        <h2>
-            {{post.name}}
-        </h2>
-        <div class="image-container">
-            <img class="publication-image" 
-            [src]="getUrlImage()" 
-            [alt]="'Imagen de  ' + post.name">
+<div class="publication-detail-page-wrapper">
+  <div *ngIf="isLoading" class="loading-spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando detalles de la publicación...</p>
+  </div>
+
+  <mat-card *ngIf="!isLoading && post" class="publication-detail-card">
+    <mat-card-header>
+      <mat-card-title class="animal-name">{{post.name}}</mat-card-title>
+    </mat-card-header>
+
+    <div class="card-content-wrapper">
+      <div class="image-gallery-container">
+        <div class="main-image">
+          <img [src]="mainImageUrl" [alt]="'Imagen de ' + post.name">
         </div>
-        <p>
-            {{post.description}}
-        </p>
+
+        </div>
+
+      <div class="animal-info-section">
+        <mat-card-content>
+          <p class="animal-description">
+            <mat-icon>info</mat-icon> Atributos:
+          </p>
+
+          <div class="animal-attributes">
+            @for (attribute of post.atributesModels; track $index) {
+                <p><mat-icon>check</mat-icon> {{attribute.name}}</p>
+            }
+            </div>
+
+                @if(showContact)
+    {
+      <mat-divider></mat-divider>
+        <div class="publisher-info-section">
+          <app-post-user-detail [userId]="post.userId"></app-post-user-detail>
+        </div>
+    }
+        </mat-card-content>
+
+        <mat-card-actions class="action-buttons">
+          <button mat-raised-button color="primary" (click)="contactPublisher()">
+            <mat-icon>mail</mat-icon> Contactar al usuario
+          </button>
+          <button mat-button color="accent" (click)="sharePublication()">
+            <mat-icon>share</mat-icon> Compartir
+          </button>
+        </mat-card-actions>
+      </div>
     </div>
-    <div class="user-detail-container">
-        <app-post-user-detail [userId]="post.userId"></app-post-user-detail>
-    </div>
+    
+    <mat-divider></mat-divider>
+
+
+  </mat-card>
+
+  <div *ngIf="!isLoading && !post" class="not-found-message">
+    <mat-icon color="warn">error_outline</mat-icon>
+    <p>La publicación no se pudo cargar o no existe.</p>
+    <button mat-raised-button color="primary" routerLink="/animals">Volver a la lista</button>
+  </div>
 </div>

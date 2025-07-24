@@ -4,13 +4,13 @@
     {
         <a target="_blank"
         [href]="'https://wa.me/549' + contact.contact + '?text='+textToSend" >
-            {{contact.contact}}
+            {{contact.type + ": " + contact.contact}}
         </a>
     }
     @else if(contact.type == contactsType.Mail)
     {
         <a [href]="'mailto:' +contact.contact + '?subject=Adopción animal&body=' + textToSend">
-            {{contact.contact}}
+             {{contact.type + ": " + contact.contact}}
         </a>
     }
 }

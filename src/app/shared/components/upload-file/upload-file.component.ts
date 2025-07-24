@@ -43,7 +43,14 @@ export class UploadFileComponent {
 
   onFileSelected(event: Event): void {
 
-    this.loading = false;
+  this.fileUploaded.emit(
+    {
+      url: '',
+      fullPath: '',
+      name:''
+    });
+
+    this.loading = true;
     const element = event.currentTarget as HTMLInputElement;
     let file: File | null = null;
 
@@ -51,6 +58,7 @@ export class UploadFileComponent {
       file = element.files[0];
       this._uploadService.addPicture('file01', file, this.urlBase)
         .then((response: IBasicResponse) => {
+          this.loading = false;
           this.uploatedImageUrl = response.data.data.url;
           console.log(this.uploatedImageUrl)
           if (this.uploatedImageUrl)
@@ -63,14 +71,10 @@ export class UploadFileComponent {
           else
             this._uiService.setNewErrorStatus('No se recibió la imagen.', {});
         }).catch(error => {
+          this.loading = false;
           this._uiService.setNewErrorStatus('Error al subir imagen.', error);
         }
         )
     }
-  }
-
-  onSubmit() {
-    this.loading = true;
-    console.log("submit)");
   }
 }

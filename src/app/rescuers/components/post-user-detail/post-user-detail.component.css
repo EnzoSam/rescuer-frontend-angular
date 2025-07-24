@@ -1,18 +1,10 @@
-.detail-container
-{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
 }
 
-mat-card
+strong
 {
-    display: flex;
-    
-}
-
-.contacts{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  font-style: bold;
 }

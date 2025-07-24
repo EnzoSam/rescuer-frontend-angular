@@ -1,27 +1,14 @@
-<div class="detail-container">
-    <mat-card>
-        <mat-card-header>
-            <h2>Usuario: {{ user?.name || ''}}</h2>
-        </mat-card-header>
-        @if(userDataVisible)
-        {
-            <mat-card-content>
-                <div class="contacts">
-                    @for (c of user?.contacts; track c.contact) {
-                    <app-contact-link 
-                    [contact]="c"
-                    [textToSend]="getPublicationContactText()">
+@if(loading)
+{
+  Cargando datos del usuario...
+}
 
-                    </app-contact-link>
-                    }
-                </div>
-            </mat-card-content>
-        }
-        <mat-card-actions>
-            <button #btnContact 
-            (click)="userDataVisible = !userDataVisible; " 
-            [hidden]="userDataVisible"
-            mat-button>Contactar</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+Publicado por: <span><strong>{{ user?.name || 'Usuario Anónimo' }}</strong></span>
+<div class="contacts-list">
+  @for (c of user?.contacts; track c.contact) {
+    <app-contact-link 
+      [contact]="c"
+      [textToSend]="getPublicationContactText()">
+    </app-contact-link>
+  }
+

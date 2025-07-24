@@ -1,33 +1,224 @@
-.publication-detail-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+
+.publication-detail-page-wrapper {
   padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  box-shadow: none;
 }
 
-.animal-data-container {
+.loading-spinner-container {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;  
-  max-width: calc(100% - 400px);
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
 }
 
-.image-container
+.loading-spinner-container p {
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+
+.publication-detail-card {
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px;
+  overflow: hidden; 
+  background-color: white;
+}
+
+.publication-detail-card mat-card-header {
+  margin-bottom: 20px;
+}
+
+.publication-detail-card .animal-name {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.publication-detail-card mat-card-subtitle {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.card-content-wrapper {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 30px; 
+  margin-bottom: 20px;
+}
+
+.image-gallery-container {
+  flex: 1;
+  min-width: 300px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 500px;
+  max-height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.main-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover; 
+}
+
+.thumbnail-gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnail-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.thumbnail-image:hover {
+  border-color: #3f51b5;
+  transform: scale(1.05);
+}
+
+.animal-info-section {
+  flex: 2;
+  min-width: 300px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.animal-description {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.animal-description mat-icon {
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+.animal-attributes p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #444;
+}
+
+.animal-attributes mat-icon {
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+mat-chip-listbox {
+  margin-top: 10px;
+}
+
+mat-chip {
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 0.9em;
+  padding: 5px 10px;
+  border-radius: 16px;
+}
+
+.action-buttons {
+  margin-top: auto; 
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 30px; 
+}
+
+.action-buttons button {
+  padding: 10px 25px;
+  font-size: 1.1em;
+}
+
+.action-buttons mat-icon {
+  margin-right: 8px;
+}
+
+.publication-detail-card mat-card-footer {
+  padding: 15px 20px;
+  background-color: #f7f7f7;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
+}
+
+.publisher-info-section
 {
-  display: flex;
+  padding-top: 10px;
 }
 
-.publication-image {
-  object-fit: cover;  
-  min-width: 100%;
-  max-height: 70%;
-  min-height: 70%;
+
+.not-found-message {
+  text-align: center;
+  padding: 50px;
+  color: #555;
+  font-size: 1.2em;
 }
 
-.user-detail-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin-top: 30px;
-  
+.not-found-message mat-icon {
+  font-size: 4em;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .card-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-image {
+    max-width: 100%; 
+  }
+
+  .animal-info-section {
+    min-width: unset; 
+    width: 100%; 
+  }
+
+  .action-buttons {
+    flex-direction: column; 
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .publication-detail-card {
+    padding: 15px;
+  }
+
+  .publication-detail-card .animal-name {
+    font-size: 2em;
+  }
+
+  .animal-description,
+  .animal-attributes p,
+  .action-buttons button {
+    font-size: 1em;
+  }
 }
