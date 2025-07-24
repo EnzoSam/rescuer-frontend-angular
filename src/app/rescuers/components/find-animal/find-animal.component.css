@@ -63,7 +63,6 @@ mat-drawer-container
 {
     display: flex;
     flex-direction: row;
-    padding-right: 55px;
     margin-bottom: 20px;
 }
 
@@ -76,4 +75,22 @@ h1
 {
     flex-grow: 1;
     text-align: center;
+}
+
+.find-animal-header-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+}
+
+.spinner-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 100vh;
 }

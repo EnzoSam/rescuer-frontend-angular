@@ -15,6 +15,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilterService } from '../../services/filter.service';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator'; // Importamos MatPaginator y PageEvent
 import { CustomPaginatorIntl } from '../../../shared/components/material-paginator-intl';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 // Asegúrate de que IBasicResponse.data contenga { posts: IPost[], totalCount: number }
 export interface IPostResponseData {
@@ -29,16 +30,18 @@ export interface IPostResponseData {
     styleUrl: './find-animal.component.css',
     providers:[  { provide: MatPaginatorIntl, useValue: CustomPaginatorIntl() } ],
     imports: [
-        CommonModule,
-        MatButtonModule,
-        FindFilterPanelComponent,
-        FindAnimalListComponent,
-        MatIconModule,
-        MatSlideToggleModule,
-        MatSidenavModule,
-        RouterLink,
-        MatPaginatorModule // Importamos MatPaginatorModule aquí para el standalone
-    ]
+    CommonModule,
+    MatButtonModule,
+    FindFilterPanelComponent,
+    FindAnimalListComponent,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatSidenavModule,
+    RouterLink,
+    MatPaginatorModule 
+    ,
+    MatProgressSpinnerModule
+]
 })
 export class FindAnimalComponent implements OnInit {
 
@@ -51,11 +54,11 @@ export class FindAnimalComponent implements OnInit {
     lostMode: boolean = false;
     title: string;
 
-    // Propiedades de paginación
     totalPosts: number = 0;
     currentPageIndex: number = 0;
-    pageSize: number = 5;
+    pageSize: number = 10;
     pageSizeOptions: number[] = [5, 10, 25, 50];
+    loading:boolean = true;
 
     constructor(
         private _postService: PostService,
@@ -90,11 +93,11 @@ export class FindAnimalComponent implements OnInit {
     }
 
     private loadPostsWithCurrentFilter(): void {
+        this.loading = true;
         this._postService.filter(this.lastFilter)
             .then((response: IBasicResponse) => {
 
-                console.log(response)
-
+                this.loading = false;
                 if (response.statusCode === 200 && response.data) {
                     const responseData = response.data as IPostResponseData;
                     this.posts = responseData.posts;
@@ -112,6 +115,7 @@ export class FindAnimalComponent implements OnInit {
                 }
             })
             .catch(error => {
+                this.loading = false;
                 this.posts = [];
                 this.totalPosts = 0;
                 this._uiService.setNewErrorStatus('Error al recuperar publicaciones', error);

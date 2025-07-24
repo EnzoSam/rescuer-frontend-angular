@@ -4,6 +4,7 @@
     flex-direction: column;
     padding-left: 200px;
     padding-right: 200px;
+    min-height: 100vh;
 }
 
 .publications-container

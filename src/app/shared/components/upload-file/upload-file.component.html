@@ -1,15 +1,14 @@
 <form [formGroup]="imageForm">
-    <label id="btnUpload" *ngIf="!avatarMode" for="file">Seleccionar imagen</label>
-    <label *ngIf="avatarMode" for="file">
-    <img mat-card-avatar [src]="avatarUrl" alt="">
+    <label [hidden]="loading" id="btnUpload" *ngIf="!avatarMode" for="file" [class.disabled-label]="loading">
+        Seleccionar imagen
     </label>
-    <input
-        type="file"
-        id="file"
-        placeholder="File"
-        (change)="onFileSelected($event)"
-        #fileInput 
-        formControlName="file"
-        style="display: none;">
-</form>
 
+    <label *ngIf="avatarMode" for="file" [class.disabled-label]="loading">
+        <img mat-card-avatar [src]="avatarUrl" alt="" [class.disabled-avatar]="loading"> </label>
+
+    <mat-spinner *ngIf="loading"  [diameter]="30" class="upload-spinner"></mat-spinner> 
+    <input type="file" id="file"
+        placeholder="File" (change)="onFileSelected($event)"
+         #fileInput formControlName="file" style="display: none;"
+        [disabled]="loading" (click)="onSubmit()">
+</form>

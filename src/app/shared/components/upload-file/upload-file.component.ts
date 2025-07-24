@@ -6,11 +6,13 @@ import { UploadableFile } from '../../interfaces/uploadableFile';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { UiService } from '../../services/ui.service';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-upload-file',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, 
+    MatCardModule, MatProgressSpinnerModule],
   templateUrl: './upload-file.component.html',
   styleUrl: './upload-file.component.css'
 })
@@ -26,6 +28,7 @@ export class UploadFileComponent {
   imageForm: FormGroup;
   image: any;
   file: any;
+  loading = false;
 
   constructor(private _uploadService: UpladFilesService,
     private _uiService: UiService
@@ -39,6 +42,8 @@ export class UploadFileComponent {
   }
 
   onFileSelected(event: Event): void {
+
+    this.loading = false;
     const element = event.currentTarget as HTMLInputElement;
     let file: File | null = null;
 
@@ -50,10 +55,11 @@ export class UploadFileComponent {
           console.log(this.uploatedImageUrl)
           if (this.uploatedImageUrl)
             this.fileUploaded.emit(
-          { url: this.uploatedImageUrl, 
-            fullPath:response.data.data.fullPath,
-            name:response.data.data.name
-          });
+              {
+                url: this.uploatedImageUrl,
+                fullPath: response.data.data.fullPath,
+                name: response.data.data.name
+              });
           else
             this._uiService.setNewErrorStatus('No se recibió la imagen.', {});
         }).catch(error => {
@@ -61,5 +67,10 @@ export class UploadFileComponent {
         }
         )
     }
+  }
+
+  onSubmit() {
+    this.loading = true;
+    console.log("submit)");
   }
 }
