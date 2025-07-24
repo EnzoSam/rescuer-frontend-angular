@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "rescuers-e684f",
     "public": "dist/rescuer-frontend-angular/browser",
     "ignore": [
       "firebase.json",

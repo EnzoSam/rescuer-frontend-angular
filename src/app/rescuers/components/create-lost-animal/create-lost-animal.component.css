@@ -1,11 +1,11 @@
-.login-container {
+.create-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: calc(100vh - 80px);
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    margin-top: 25px;
   }
   
   mat-card {

@@ -1,87 +1,128 @@
-.slider-container
-{
-    position: relative;
-    height: calc(100vh - 80px);
-    background-color: #F6F4F5;
-    overflow: hidden;
-    padding-left: 100px;
-    padding-right: 100px;
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 500px; /* O el alto que desees */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 15px; /* Bordes ligeramente redondeados para un toque moderno */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra sutil para profundidad */
 }
 
-.slider-image{
-
-    position: absolute;
-    right: 250px;
-    top: 50px;
-    object-fit: cover;
-    max-height: 80%;
-    transform: scaleX(-1);
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+  z-index: 1;
 }
 
-.phrases-container{
-    position: absolute;
-    top: 100px;
-    margin-left: 100px;
+.hero-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Cambia los valores de rgba para hacer el overlay más oscuro */
+  /* Por ejemplo, de 0.5 a 0.7 o 0.8 */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Gradiente más oscuro */
+  z-index: 2;
 }
 
-.first-prhase{
-    font-size: 4rem;
-    display: block;
+.hero-content {
+  position: relative;
+  z-index: 3; /* Asegura que el contenido esté sobre la imagen y el overlay */
+  color: white; /* Color de texto claro para contraste */
+  text-align: center;
+  padding: 20px;
+  max-width: 800px; /* Limita el ancho del contenido para mejor lectura */
 }
 
-.second-phrase{
-    font-size: 4rem;
-    display: block;
-    margin-bottom: 20px;
+.hero-title {
+  font-size: 3.5em; /* Tamaño de fuente grande para el título principal */
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejor legibilidad */
 }
 
-h1
-{
-    margin-top: 5px;
-    margin-bottom: 5px;
+.hero-subtitle {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-#btnAdopt
-{
-    margin-top: 100px;
+.hero-description {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-weight: 300;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.phrases-description{
-    font-size: 1rem;
+.call-to-action-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 50px; /* Botón más redondeado */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Efecto hover suave */
 }
 
-@media (max-width: 600px) {
+.call-to-action-button:hover {
+  transform: translateY(-3px); /* Pequeño levantamiento al pasar el mouse */
+  opacity: 0.9;
+}
 
-    .slider-image{
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
 
-        right: 5px;
-        max-height: 60%;
-        width: 200px;
-        transform: scaleX(-1);
-    }
+  .hero-title {
+    font-size: 2.5em;
+  }
 
-    .phrases-container{
-        margin-left: 5px;
-        left: 5px;
-        top: 70px;
-    }
+  .hero-subtitle {
+    font-size: 1.5em;
+  }
 
-    .first-prhase{
-        font-size: 2rem;
-    }
-    
-    .second-phrase{
-        font-size: 2rem;
-        margin-bottom: 20px;        
-    }    
+  .hero-description {
+    font-size: 1em;
+  }
 
-    .phrases-description{
-        max-width: 55%;
-    }
+  .call-to-action-button {
+    font-size: 1em;
+    padding: 12px 25px;
+  }
+}
 
-    .slider-container
-    {
-        position: relative;
-        max-height:  70%;
-    }
+@media (max-width: 480px) {
+  .hero-slider {
+    height: 400px;
+  }
+
+  .hero-title {
+    font-size: 2em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2em;
+  }
+}
+
+.hero-title {
+  /* ... otros estilos ... */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Sombra más fuerte */
+}
+
+.hero-subtitle {
+  /* ... otros estilos ... */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Sombra más fuerte */
+}
+
+.hero-description {
+  /* ... otros estilos ... */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para la descripción */
 }

@@ -6,7 +6,8 @@ export interface IPost
     title:string
     image:string |  undefined
     description:string | undefined
-    contentType:ContentsType,
+    contentType:ContentsType
     state:PostStates
+    postCategory?:string
 }
 

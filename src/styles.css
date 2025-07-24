@@ -20,7 +20,7 @@ body { font-family: "Source Code Pro"; }
 .component-with-nav-container
 {
     min-height: calc(100vh - 65px);
-    padding-top: 65px;
+    padding-top: 40px;
 }
 
 .margin-0{

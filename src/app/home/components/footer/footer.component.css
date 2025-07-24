@@ -1,0 +1,81 @@
+.simple-app-footer {
+     background-color: var(--mdc-filled-button-container-color, orange);
+  color: white;
+  padding: 30px 20px; /* Espaciado interno generoso */
+  text-align: center; /* Centra todo el texto dentro del footer */
+  font-family: 'Roboto', sans-serif; /* Consistencia de fuente */
+}
+
+.simple-footer-content {
+  max-width: 800px; /* Limita el ancho del contenido para un diseño limpio */
+  margin: 0 auto; /* Centra el contenido dentro del footer */
+}
+
+.simple-footer-brand {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 5px; /* Espacio mínimo debajo del título principal */
+}
+
+.simple-footer-slogan {
+  font-size: 1em;
+  opacity: 0.9;
+  margin-bottom: 20px; /* Espacio para separar del siguiente bloque */
+}
+
+.simple-footer-links {
+  margin-bottom: 20px; /* Espacio debajo de los enlaces */
+}
+
+.simple-footer-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95em;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.simple-footer-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.link-separator {
+  margin: 0 10px; /* Espacio alrededor del separador */
+  opacity: 0.6; /* Un poco menos visible que el texto */
+}
+
+.simple-footer-copyright {
+  font-size: 0.85em;
+  opacity: 0.7; /* Menos opacidad para el copyright, indicando que es información secundaria */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 576px) {
+  .simple-app-footer {
+    padding: 25px 15px;
+  }
+
+  .simple-footer-brand {
+    font-size: 1.5em;
+  }
+
+  .simple-footer-slogan {
+    font-size: 0.9em;
+  }
+
+  .simple-footer-links a,
+  .simple-footer-copyright {
+    font-size: 0.8em;
+  }
+  
+  .simple-footer-links {
+    display: flex; /* Para apilar enlaces si son muchos o la pantalla es muy chica */
+    flex-direction: column;
+    gap: 5px; /* Espacio entre los enlaces apilados */
+  }
+
+  .link-separator {
+    display: none; /* Oculta el separador cuando los enlaces se apilan */
+  }
+}

@@ -11,8 +11,8 @@ import { FiltersDefaults } from "../constants/filters.constants";
     new():IFilter
     {
         return {
-            pageFrom:FiltersDefaults.PageFrom,
-            pageTo:FiltersDefaults.PageTo,
+            pageIndex:FiltersDefaults.PageFrom,
+            pageSize:FiltersDefaults.PageTo,
             state:PostStates.Published,
             lost:false,
             atributes:[]  

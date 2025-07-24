@@ -1,3 +1,19 @@
-<mat-toolbar color="primary">
-    Footer
-</mat-toolbar>
+<footer class="simple-app-footer mat-primary">
+  <div class="simple-footer-content">
+    <p class="simple-footer-brand">Adoptá un Amigo</p>
+    <p class="simple-footer-slogan">Cambiando vidas, una patita a la vez.</p>
+    
+    <div class="simple-footer-links">
+      <a routerLink="/privacy-policy">Política de Privacidad</a>
+      <span class="link-separator">|</span>
+      <a routerLink="/terms-of-service">Términos de Servicio</a>
+    </div>
+
+    <p class="simple-footer-copyright">
+      &copy; {{ 2025 }} Todos los derechos reservados. 
+      <span class="developer-info">
+        Desarrollado por <a href="https://enzosam.github.io/portfolio/" target="_blank" rel="noopener noreferrer">Same Devs</a>
+      </span>
+    </p>
+  </div>
+</footer>

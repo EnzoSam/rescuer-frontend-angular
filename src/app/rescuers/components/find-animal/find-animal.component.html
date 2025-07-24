@@ -1,40 +1,42 @@
 <div class="component-with-nav-container find-animal-container">
-    <mat-drawer-container [hasBackdrop]="true">
-        <mat-drawer class="dashboard-menu" #drawer mode="over">
-
-            <div class="filter-header">
-                <h4>Filtros</h4>
-                <mat-icon *ngIf="drawer.opened" #btnClose autosize class="close-sidebar" type="button" mat-button
-                    (click)="drawer.toggle()">
-                    close
-                </mat-icon>
-            </div>
-
-            <div class="atributes-container">
-                <app-find-filter-panel (onFilterChanged)="onFilterChanged($event)"></app-find-filter-panel>
-            </div>
-        </mat-drawer>
-
-        <mat-icon id="filter-icon" *ngIf="!drawer.opened" #btnOpen color="primary" type="button" mat-button
-            (click)="drawer.toggle()">
-            filter_alt
+  <mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer class="filter-drawer" class="dashboard-menu" #drawer mode="over">
+      <div class="filter-header">
+        <h4>Filtros</h4>
+        <mat-icon *ngIf="drawer.opened" class="close-sidebar" type="button" mat-button (click)="drawer.toggle()">
+          close
         </mat-icon>
+      </div>
+      <div class="atributes-container">
+        <app-find-filter-panel (onFilterChanged)="onFilterChanged($event)"></app-find-filter-panel>
+      </div>
+    </mat-drawer>
 
-        <section id="list">
-            <div class="publication-header">
-                <h1 class="list-title">{{title}}</h1>
-                <button *ngIf="!lostMode" routerLink="../create" mat-raised-button color="primary">Publicar</button>
-                <button *ngIf="lostMode" routerLink="../create-lost" mat-raised-button color="primary">Publicar</button>
-            </div>            
-            <app-find-animal-list 
-            (postStateChanged)="refresh()"
-            [posts]="posts" class="animal-list">
-            </app-find-animal-list>
-            <div class="publications-footer">
-                <button *ngIf="posts && posts.length > 0" mat-button color="primary">Cargar más</button>
-            </div>
-        </section>
+    <mat-icon id="filter-icon" *ngIf="!drawer.opened" color="primary" type="button" mat-button
+      (click)="drawer.toggle()">
+      filter_alt
+    </mat-icon>
 
-    </mat-drawer-container>
+    <section id="list">
+      <div class="publication-header">
+        <h1 class="list-title">{{title}}</h1>
+        <button *ngIf="!lostMode" routerLink="../create" mat-raised-button color="primary">Publicar</button>
+        <button *ngIf="lostMode" routerLink="../create-lost" mat-raised-button color="primary">Publicar</button>
+      </div>
 
+      <app-find-animal-list (postStateChanged)="refresh()" [posts]="posts" class="animal-list">
+      </app-find-animal-list>
+
+      <div class="publications-footer">
+        <mat-paginator 
+        [length]="totalPosts" 
+        [pageSize]="pageSize" 
+        [pageIndex]="currentPageIndex"
+        [pageSizeOptions]="pageSizeOptions" 
+        (page)="onPageChange($event)"
+          aria-label="Seleccionar página de publicaciones">
+        </mat-paginator>
+      </div>
+    </section>
+  </mat-drawer-container>
 </div>
