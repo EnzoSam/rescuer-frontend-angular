@@ -40,7 +40,8 @@ export class AuthService extends BaseNoAuthService {
       lastName: '',
       email: '',
       image: '',
-      contacts: []
+      contacts: [],
+      zoneId:3
     };
   }
 

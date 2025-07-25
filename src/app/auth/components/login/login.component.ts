@@ -67,8 +67,7 @@ export class LoginComponent implements OnInit {
 
     }).catch(error => {
 
-      console.log(error)
-      if (error.status === 401)
+      if (error.error)
         this._uiService.setNewErrorStatus(error.error.message, error);
       else 
         this._uiService.setNewErrorStatus(error.message, error);

@@ -24,6 +24,7 @@ export class RegisterComponent {
   register: IRegister;
   form:FormGroup;
   hide = true;
+  proccessing = false;
 
   constructor(private _authService: AuthService,
     private _router:Router,
@@ -44,21 +45,21 @@ export class RegisterComponent {
   get password() { return this.form.get('password'); }
 
   submit(e: any): void {
-    e.preventDefault();
-
+    this.proccessing = true;
+    
+    e.preventDefault();    
     this.register  = this.form.value;
-
-    console.warn(this.register);
-
+    
     this._authService.initRegister(this.register).then(response => {
       
+      this.proccessing = false;
       if(response && response.statusCode == 200)
           this._router.navigate(['../auth/verify']);
       else
         this._uiService.setNewErrorStatus(response.message, undefined);
       
     }).catch(error => {
-      console.log(error);
+      this.proccessing = false;
       this._uiService.setNewErrorStatus(error.message, error);
     });
   }

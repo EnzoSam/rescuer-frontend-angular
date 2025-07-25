@@ -29,7 +29,8 @@
               "src/app/core/themes/oragetheme.scss",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "/comunidad/"
           },
           "configurations": {
             "production": {

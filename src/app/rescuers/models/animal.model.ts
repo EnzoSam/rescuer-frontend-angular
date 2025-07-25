@@ -11,7 +11,7 @@ export class Animal
     description?:string
     atributesModels:IAtribute[]
     atributes:any[]
-    
+    state:number = 0;
     constructor(_id:any, _name:string, _userId:string) 
     {
         this.name = _name;

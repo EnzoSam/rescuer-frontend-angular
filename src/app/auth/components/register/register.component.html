@@ -38,7 +38,8 @@
           <mat-error *ngIf="password && password.errors?.['required']">Requerido</mat-error>
         </mat-form-field>
 
-        <button  [disabled]="!form.valid" mat-raised-button color="primary">Registrar</button>
+        <button  [disabled]="!form.valid || proccessing"
+         mat-raised-button color="primary">Registrar</button>
 
       </mat-card-content>
       <mat-card-actions>

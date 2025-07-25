@@ -8,4 +8,5 @@ export interface IUser
     email: string
     image:string
     contacts:IContact[]
+    zoneId:any
 }

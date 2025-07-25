@@ -7,6 +7,12 @@
   <mat-card *ngIf="!isLoading && post" class="publication-detail-card">
     <mat-card-header>
       <mat-card-title class="animal-name">{{post.name}}</mat-card-title>
+      @if(post.state === 1)
+      {        
+        <mat-card-subtitle>
+         <button mat-flat-button color="warn">En revisión</button>
+        </mat-card-subtitle>
+      }
     </mat-card-header>
 
     <div class="card-content-wrapper">

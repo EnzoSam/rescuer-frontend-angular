@@ -35,6 +35,7 @@
 .publication-detail-card .animal-name {
   font-size: 2.5em;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .publication-detail-card mat-card-subtitle {
