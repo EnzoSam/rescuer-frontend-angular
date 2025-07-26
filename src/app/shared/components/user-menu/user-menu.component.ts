@@ -35,4 +35,8 @@ export class UserMenuComponent implements OnInit{
     return this.aunthentication && this.aunthentication.userName;
   }
 
+  isAdmin():boolean
+  {
+    return this._uiService.isAdminAuthentication();
+  }
 }

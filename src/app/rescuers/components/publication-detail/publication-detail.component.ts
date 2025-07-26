@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { IPost } from '../../interfaces/post.interface'; // IPost debería tener más detalles
 import { AnimalService } from '../../services/animal.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterPathParams } from '../../../shared/constants/routesPaths.constant';
 import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse.interface';
 import { Animal } from '../../models/animal.model';
@@ -20,6 +20,8 @@ import { MatChipsModule } from '@angular/material/chips'; // Para mostrar atribu
 import { MatToolbarModule } from '@angular/material/toolbar'; // Opcional, para la cabecera
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from "@angular/material/divider"; // Para una galería de imágenes
+import { PostService } from '../../services/post.service';
+import { ContentsType } from '../../constants/posts.constants';
 
 @Component({
   selector: 'app-publication-detail',
@@ -36,25 +38,27 @@ import { MatDividerModule } from "@angular/material/divider"; // Para una galer�
     MatGridListModule // Nuevo (opcional, para la galería)
     ,
     MatDividerModule
-],
+  ],
   templateUrl: './publication-detail.component.html',
   styleUrl: './publication-detail.component.css'
 })
 export class PublicationDetailComponent implements OnInit {
-
   post?: Animal;
-  isLoading: boolean = true; 
+  isLoading: boolean = true;
   mainImageUrl: string = '';
-  showContact= false;
+  showContact = false;
 
   constructor(
     private _animalService: AnimalService,
     private _activateRoute: ActivatedRoute,
-    private _uiService: UiService
-  ) {}
+    private _uiService: UiService,
+    private _authService: AuthService,
+    private _postService: PostService,
+    private _location:Location
+  ) { }
 
   ngOnInit(): void {
-    this.isLoading = true; 
+    this.isLoading = true;
 
     if (this._activateRoute.snapshot.paramMap.has(RouterPathParams.id)) {
       this._activateRoute.params.subscribe(params => {
@@ -63,21 +67,20 @@ export class PublicationDetailComponent implements OnInit {
           this.load(idParam);
         } else {
           this._uiService.setNewErrorStatus('ID de publicación no encontrado.', {});
-          this.isLoading = false; 
+          this.isLoading = false;
         }
       });
     } else {
       this._uiService.setNewErrorStatus('ID de publicación no proporcionado en la URL.', {});
-      this.isLoading = false; 
+      this.isLoading = false;
     }
   }
 
-  load(id: string): void { 
+  load(id: string): void {
     this._animalService.getById(id)
       .then((response: IBasicResponse) => {
         if (response.statusCode === 200 && response.data) {
-          this.post = response.data as Animal; 
-          console.log(this.post)
+          this.post = response.data as Animal;
           this.setMainImage(this.post.image);
         } else {
           this._uiService.setNewMessageStatus('Publicación no encontrada o datos inválidos.', {});
@@ -116,10 +119,35 @@ export class PublicationDetailComponent implements OnInit {
         text: this.post?.description || 'Encontrá a tu nuevo amigo!',
         url: window.location.href,
       })
-      .then(() => this._uiService.setNewMessageStatus('¡Publicación compartida con éxito!', {}))
-      .catch((error) => console.error('Error al compartir:', error));
+        .then(() => this._uiService.setNewMessageStatus('¡Publicación compartida con éxito!', {}))
+        .catch((error) => console.error('Error al compartir:', error));
     } else {
       this._uiService.setNewMessageStatus('Puedes copiar el enlace: ' + window.location.href, {});
+    }
+  }
+
+  isPublicationOwner(): boolean {
+    if (!this.post)
+      return false;
+    if (!this._uiService.getAuthentication())
+      return false;
+
+    return this._uiService.getAuthentication().userId === this.post?.userId;
+  }
+
+  deleteClick() {
+
+    if (this.post) {
+      this._postService.changeStateToArchive
+      (this.post.id, ContentsType.Animal).then(data => {
+      this._uiService.setNewErrorStatus('Publicación eliminada.',{});
+        this._location.back();
+      }
+      ).catch(error=>
+      {
+        this._uiService.setNewErrorStatus('No se pudo eliminar.',{});
+      }
+      )
     }
   }
 }

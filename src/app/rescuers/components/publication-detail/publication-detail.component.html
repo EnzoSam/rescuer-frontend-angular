@@ -6,11 +6,16 @@
 
   <mat-card *ngIf="!isLoading && post" class="publication-detail-card">
     <mat-card-header>
-      <mat-card-title class="animal-name">{{post.name}}</mat-card-title>
-      @if(post.state === 1)
+      <mat-card-title class="animal-name">
+      <span>{{post.name}}</span>  
+       @if(post.state === 1){
+        <span class="revision" >(En revisión)</span>
+       }
+      </mat-card-title>
+      @if(isPublicationOwner())
       {        
         <mat-card-subtitle>
-         <button mat-flat-button color="warn">En revisión</button>
+         <button (click)="deleteClick()" mat-flat-button color="warn">Eliminar</button>
         </mat-card-subtitle>
       }
     </mat-card-header>

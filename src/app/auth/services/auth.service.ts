@@ -111,6 +111,7 @@ export class AuthService extends BaseNoAuthService {
     let auth: IAuthentication = {
       userName,
       token,
+      userId,
       roles: []
     };
     console.log(auth);

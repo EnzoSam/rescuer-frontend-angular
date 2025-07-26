@@ -61,15 +61,19 @@ export class LoginComponent implements OnInit {
     this.login.password = this.password.value + '';
     this._authService.login(this.login).then(response => {
 
-      this._authService.rememberUser
-      (this.login.email, response.data, response.userId);
-      this._router.navigate(['../home']);
+      if (response.data && response.data.token) {
+        this._authService.rememberUser
+          (this.login.email, response.data.token, response.data.sub);
+        this._router.navigate(['../home']);
+      } else {
+        this._uiService.setNewErrorStatus('No se pudo completar el login.', {});
+      }
 
     }).catch(error => {
 
       if (error.error)
         this._uiService.setNewErrorStatus(error.error.message, error);
-      else 
+      else
         this._uiService.setNewErrorStatus(error.message, error);
     });
   }
