@@ -15,6 +15,7 @@ import { consumerAfterComputation } from '@angular/core/primitives/signals';
 export class ValidateEmailComponent implements OnInit {
 
   error?: any;
+  validating = false;
   constructor(private _route: ActivatedRoute,
     private _authService: AuthService,
     private _router: Router,
@@ -34,13 +35,18 @@ export class ValidateEmailComponent implements OnInit {
       const email = params['email'];
       const token = params['token'];
       if (email && token) {
-        this._authService.validateMail(email, token).then(value => {
-          console.log(value);
+        this.validating = true;
+        this._authService.validateMail(email, token).then(value => {  
+          this.validating = false;        
           if (value.code == 200)
+          {
+            this._uiService.setNewMessageStatus('Cuenta validada correctamente.',{});
             this._router.navigate(['../auth/login']);
+          }
           else
             this._uiService.setNewErrorStatus(value.message, value);
         }).catch(error => {
+          this.validating = false;
           this._uiService.setNewErrorStatus(error, error);
         });
       }
