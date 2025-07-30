@@ -25,6 +25,7 @@ export class NewPasswordComponent implements OnInit {
   hide = true;
   mail?: string;
   token?: string;
+  proccessing = false;
 
   constructor(private _activateRoute: ActivatedRoute,
     private _authService: AuthService,
@@ -55,18 +56,23 @@ export class NewPasswordComponent implements OnInit {
 
   submit(e: any) {
     e.preventDefault();
-
+    this.proccessing = true;
     if (!this.mail || !this.token || !this.password?.value)
       return;
 
     this._authService.changePassword(this.mail, this.token, this.password.value).then
       (result => {
+        this.proccessing = false;
         if (result.code == 200)
-          this._router.navigate(['../verify', '1']);
+        {  
+          this._uiService.setNewMessageStatus('Contraseña cambiada correctamente',{});        
+          this._router.navigate(['../auth/login']);
+        }
         else
           this._uiService.setNewErrorStatus(result.message, result);
       })
       .catch(error => {
+        this.proccessing = false;
         this._uiService.setNewErrorStatus(error.message, error);
       })
   }

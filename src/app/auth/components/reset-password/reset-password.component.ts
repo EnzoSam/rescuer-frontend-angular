@@ -22,6 +22,7 @@ export class ResetPasswordComponent {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   hide:boolean = false;
+  proccessing = false;
 
   constructor(private _authService:AuthService,
     private _uiService:UiService,
@@ -33,16 +34,18 @@ export class ResetPasswordComponent {
   submit(e:any)
   {
     e.preventDefault();
-
+    this.proccessing = true;
     let mailString = this.email.value + '';
     this._authService.requestResetPassword(mailString).then(value=>
       {
+        this.proccessing = false;
         if(value.code == 200)
           this._router.navigate(['../auth/verify','1']);
         else
           this._uiService.setNewErrorStatus(value.message, value);
       }).catch(error=>
         {
+          this.proccessing = false;
           this._uiService.setNewErrorStatus(error.message, error);
         })
   }
