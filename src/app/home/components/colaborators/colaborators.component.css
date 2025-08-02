@@ -74,6 +74,11 @@
   margin-top: 0;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Media Queries para responsividad */
 @media (max-width: 768px) {
   .partners-title {

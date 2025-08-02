@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UpladFilesService } from '../../services/uploadFile.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,19 +7,20 @@ import { IBasicResponse } from '../../../core/interfaces/responses/basicresponse
 import { UiService } from '../../services/ui.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-upload-file',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, 
-    MatCardModule, MatProgressSpinnerModule],
+    MatCardModule, MatProgressSpinnerModule,MatIconModule],
   templateUrl: './upload-file.component.html',
   styleUrl: './upload-file.component.css'
 })
 export class UploadFileComponent {
 
   @Input() urlBase: string;
-  @Input() avatarUrl?: string;
+  @Input() avatarUrl?: string | null;
   @Input() avatarMode: boolean = false;
   @Output() fileUploaded = new EventEmitter<UploadableFile>();
 

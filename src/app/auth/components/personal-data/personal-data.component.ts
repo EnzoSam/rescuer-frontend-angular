@@ -109,8 +109,11 @@ export class PersonalDataComponent {
     this.image = file.name;
   }
 
-  getUrlImage():string
+  getUrlImage():string | null
   {
+    if(!this.image || this.image.length == 0)
+      return null;
+    
     return Backend.ResourcesUrl + 'users/' + this.image;
   }
 

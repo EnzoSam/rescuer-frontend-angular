@@ -1,22 +1,50 @@
-.data-container
-{
-    padding: 20px;
-}
-.datas-container
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap:20px;
-    padding: 20px;
-}
+.data-container {
+  padding: 24px;
 
-mat-card
-{
-    width: 300px;
-}
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
 
-h1{
-    text-align: center;
-    margin-bottom: 20px;
+  .datas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .data-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .data-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .data-description {
+    margin-top: 8px;
+    color: #555;
+  }
+
+  .contact-list {
+    margin-top: 12px;
+    ul {
+      padding-left: 20px;
+      margin: 0;
+      li {
+        margin-bottom: 6px;
+        mat-icon {
+          font-size: 18px;
+          vertical-align: middle;
+          margin-right: 6px;
+        }
+      }
+    }
+
+    .contact-type {
+      color: #888;
+      font-size: 0.9em;
+    }
+  }
 }

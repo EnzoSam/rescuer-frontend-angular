@@ -2,10 +2,15 @@
     <label [hidden]="loading" id="btnUpload" *ngIf="!avatarMode" for="file" [class.disabled-label]="loading">
         Seleccionar imagen
     </label>
-
     <label *ngIf="avatarMode" for="file" [class.disabled-label]="loading">
-        <img mat-card-avatar [src]="avatarUrl" alt="" [class.disabled-avatar]="loading"> </label>
-
+        @if(avatarUrl && avatarUrl !== '')
+        {
+            <img mat-card-avatar [src]="avatarUrl" alt="" [class.disabled-avatar]="loading">            
+        }
+        @else{
+            <mat-icon class="no-avatar-icon">account_circle</mat-icon>
+        }
+    </label>
     <div class="upload-spinner-container" *ngIf="loading">
         <mat-spinner [diameter]="30" class="upload-spinner"></mat-spinner>
     </div>
