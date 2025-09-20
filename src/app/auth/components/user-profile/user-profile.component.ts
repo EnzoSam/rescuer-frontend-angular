@@ -60,6 +60,7 @@ export class UserProfileComponent {
     this._userService.updateUser(this.user)
     .then((response:IBasicResponse) => {
       
+      this._uiService.setNewMessageStatus('Perfil actualizado',{});
       this._router.navigate(['../']);
       
     }).catch(error => {
