@@ -121,7 +121,6 @@ export class AuthService extends BaseNoAuthService {
       userId,
       roles: []
     };
-    console.log(auth);
     localStorage.setItem('auth', JSON.stringify(auth));
     this._iuService.loadAuthentication();
   }
