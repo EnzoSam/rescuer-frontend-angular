@@ -14,3 +14,10 @@ app-personal-data,app-caregiver-profile-resume{
   display: flex;
   width: 70%;
 }
+
+  @media (max-width: 600px) {
+    app-personal-data,app-caregiver-profile-resume
+    {
+      width: 100%;
+    }
+  }

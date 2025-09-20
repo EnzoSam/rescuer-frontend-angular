@@ -6,4 +6,5 @@ export interface IFilter {
     atributes: string[];
     state: PostStates;
     lost: boolean;
+    onlyOwenerPublished:boolean
 }

@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
 
       if (response.data && response.data.token) {
         this._authService.rememberUser
-          (this.login.email, response.data.token, response.data.sub);
+          (this.login.email, response.data.token,
+            response.data.sub, response.data.refreshToken);
         this._router.navigate(['../home']);
       } else {
         this._uiService.setNewErrorStatus('No se pudo completar el login.', {});

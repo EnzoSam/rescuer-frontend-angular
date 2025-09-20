@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,12 +10,14 @@ import { IRegister } from '../../interfaces/register.interface';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UiService } from '../../../shared/services/ui.service';
+import { whatsappValidator } from '../../../shared/validators/whatsapp.validator';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule,
-    MatInputModule, FormsModule, ReactiveFormsModule, MatIconModule, MatButtonModule],
+    MatInputModule, FormsModule, ReactiveFormsModule, MatIconModule,
+     MatButtonModule, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -35,7 +37,8 @@ export class RegisterComponent {
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', [Validators.required]),
       name : new FormControl('', [Validators.required]),
-      lastName : new FormControl('', [Validators.required])
+      lastName : new FormControl('', [Validators.required]),
+      phone : new FormControl('', [whatsappValidator()])
     });    
   }
 
@@ -43,6 +46,7 @@ export class RegisterComponent {
   get name() { return this.form.get('name'); }
   get lastName() { return this.form.get('lastName'); }
   get password() { return this.form.get('password'); }
+  get phone() { return this.form.get('phone'); }
 
   submit(e: any): void {
     this.proccessing = true;

@@ -12,11 +12,16 @@ import { IBasicResponse } from '../../core/interfaces/responses/basicresponse.in
 import { IUser } from '../interfaces/iuser.interface';
 import { ContactsType } from '../../shared/constants/contact.constant';
 import { ContactService } from '../../shared/services/contact.service';
+import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends BaseNoAuthService {
+
+  isRefreshing = false;
+  refreshTokenSubject: BehaviorSubject<any | null> = new BehaviorSubject<any | null>(null);
+
 
   constructor(protected override _httpClient: HttpClient,
     private _iuService: UiService,
@@ -107,10 +112,12 @@ export class AuthService extends BaseNoAuthService {
     });
   }
 
-  rememberUser(userName: string, token: string, userId: string) {
+  rememberUser(userName: string, token: string,
+     userId: string, refreshToken:string) {
     let auth: IAuthentication = {
       userName,
       token,
+      refreshToken,
       userId,
       roles: []
     };
@@ -233,5 +240,27 @@ export class AuthService extends BaseNoAuthService {
       wc.contact = _whatsapp;
       _user.contacts.push(wc);
     }
+  }
+
+    refreshToken(refreshToken: string): Observable<ILoginResponse> {
+    if (this.isRefreshing) {
+      return this.refreshTokenSubject.asObservable();
+    }
+
+    this.isRefreshing = true;
+    this.refreshTokenSubject.next(null);
+
+    return this._httpClient.post<ILoginResponse>
+        (this.getBaseUrlNameSpace() + "no-auth/refresh-token", 
+        {refreshToken})
+      .pipe(
+        tap((response) => {
+          this.refreshTokenSubject.next(response);
+        }),
+        finalize(() => {
+          console.log('finalizo refresh token');
+          this.isRefreshing = false;
+        })
+      );
   }
 }

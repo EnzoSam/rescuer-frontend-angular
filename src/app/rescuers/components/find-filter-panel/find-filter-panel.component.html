@@ -23,6 +23,14 @@
         }
     </div>
 
+    @if(isAuthenticated()){
+    <mat-divider></mat-divider>    
+    <mat-slide-toggle (change)="onFilterToogle()" 
+    [(ngModel)]="onlyOwenerPublished" color="primary">
+    Mis publicaciones        
+    </mat-slide-toggle>
+    }
+
     <mat-divider></mat-divider>
 
     <mat-radio-group color="primary" (change)="onFilterToogle()"

@@ -27,6 +27,12 @@
           <input matInput formControlName="lastName" required>
           <mat-error *ngIf="lastName && lastName.errors?.['required']">Requerido</mat-error>
         </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Celular</mat-label>
+          <input  matInput formControlName="phone" type="tel" name="phone" id="phone" >     
+          <mat-error *ngIf="phone?.touched && phone?.errors?.['invalidWhatsApp']">
+            No válido</mat-error>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Ingresa tu password</mat-label>

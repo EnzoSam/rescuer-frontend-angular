@@ -36,6 +36,7 @@ export class FindFilterPanelComponent implements OnInit{
   postStetes = PostStates;
   filterState:number = PostStates.Published;
   isAdmin = false;
+  onlyOwenerPublished = false;
 
   @Output() onFilterChanged:EventEmitter<IFilter> = new EventEmitter<IFilter>();
 
@@ -86,8 +87,14 @@ export class FindFilterPanelComponent implements OnInit{
   {    
     let filter = this._filterService.new();
     filter.state = this.filterState;
+    filter.onlyOwenerPublished = this.onlyOwenerPublished;
     filter.atributes = [...this.types,...this.genders,...this.ages]
     .filter(a=>a.checked).map(a=>a.id);
     this.onFilterChanged.emit(filter);
+  }
+
+  isAuthenticated():boolean
+  {
+    return this._uiService.isAuthenticated();
   }
 }

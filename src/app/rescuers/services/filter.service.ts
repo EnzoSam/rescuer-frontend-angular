@@ -15,7 +15,8 @@ import { FiltersDefaults } from "../constants/filters.constants";
             pageSize:FiltersDefaults.PageTo,
             state:PostStates.Published,
             lost:false,
-            atributes:[]  
+            atributes:[]  ,
+            onlyOwenerPublished: false
         }
     }
   }
