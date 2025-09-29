@@ -13,6 +13,7 @@ import { IUser } from '../interfaces/iuser.interface';
 import { ContactsType } from '../../shared/constants/contact.constant';
 import { ContactService } from '../../shared/services/contact.service';
 import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
+import { useAnimation } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -126,8 +127,20 @@ export class AuthService extends BaseNoAuthService {
   }
 
   logOut() {
+
+    const currentAuth = this._iuService.loadAuthentication();
     localStorage.removeItem('auth');
     this._iuService.clearAuth();
+    if(currentAuth && currentAuth.refreshToken)
+    this._httpClient.post
+        (this.getBaseUrlNameSpace() + "no-auth/logout", 
+         { refreshToken : currentAuth.refreshToken})
+         .subscribe((response:any)=>{
+          console.log(response);
+         },
+        error=>{
+          console.log('no logout');
+        });
   }
 
   requestResetPassword(email: string): Promise<IResult> {

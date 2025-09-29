@@ -49,14 +49,17 @@ export class UiService {
     this.setNewState({code:200, message, data});
   }
 
-  loadAuthentication():void
+  loadAuthentication():IAuthentication | null
   {
      let string = localStorage.getItem('auth');
      if(string && string !== '') 
      {
         let auth: IAuthentication = JSON.parse(string);
-        this.accountStauts.next(auth);        
+        this.accountStauts.next(auth);  
+        return auth;      
      }     
+
+     return null;
   }
 
   getAuthentication():IAuthentication
