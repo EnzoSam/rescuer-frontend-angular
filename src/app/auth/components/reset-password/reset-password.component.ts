@@ -22,7 +22,7 @@ export class ResetPasswordComponent {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   hide:boolean = false;
-  proccessing = false;
+  proccessing = false;    
 
   constructor(private _authService:AuthService,
     private _uiService:UiService,
@@ -46,7 +46,8 @@ export class ResetPasswordComponent {
       }).catch(error=>
         {
           this.proccessing = false;
-          this._uiService.setNewErrorStatus(error.message, error);
+          this._uiService.setNewErrorStatus
+          (error.error?.message  || error.message, error);
         })
   }
 }

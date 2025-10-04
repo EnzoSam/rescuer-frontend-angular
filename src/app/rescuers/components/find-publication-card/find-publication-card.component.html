@@ -4,7 +4,9 @@
       <mat-card-title>{{post.title}}</mat-card-title>
       <mat-card-subtitle>{{post.postCategory}}</mat-card-subtitle>
     </mat-card-header>
-    <img id="post-image" mat-card-image [src]="getUrlImage()" [alt]="post.title">
+    <img id="post-image" mat-card-image [src]="getUrlImage()" 
+    [alt]="post.title"
+     onload="this.classList.add('image-loaded')" >
     <mat-card-content>
       <p>
         {{post.description}}

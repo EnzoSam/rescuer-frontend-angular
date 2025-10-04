@@ -275,4 +275,11 @@ export class AuthService extends BaseNoAuthService {
         })
       );
   }
+
+  resendVerificationMail(mail:string):Observable<any>
+  {
+    return this._httpClient.post<IBasicResponse>
+        (this.getBaseUrlNameSpace() + "no-auth/resend-verification-mail", 
+        {mail:mail});    
+  }
 }

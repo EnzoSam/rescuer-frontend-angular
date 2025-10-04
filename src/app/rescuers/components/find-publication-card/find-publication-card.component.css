@@ -18,6 +18,9 @@
 
     min-width: 300px;
     min-height: 250px;
+
+        opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
 }
 
 mat-card-actions
@@ -25,4 +28,8 @@ mat-card-actions
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+#post-image.image-loaded {
+    opacity: 1;
 }

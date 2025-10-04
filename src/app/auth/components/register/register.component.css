@@ -13,7 +13,7 @@ mat-card
     width: 400px;
 }
 
-mat-card-content{
+mat-card-content, mat-card-actions{
     display: flex;
     flex-direction: column;
 }

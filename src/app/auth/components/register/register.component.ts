@@ -27,6 +27,7 @@ export class RegisterComponent {
   form:FormGroup;
   hide = true;
   proccessing = false;
+  allowResendMail = false;
 
   constructor(private _authService: AuthService,
     private _router:Router,
@@ -60,11 +61,35 @@ export class RegisterComponent {
       if(response && response.statusCode == 200)
           this._router.navigate(['../auth/verify']);
       else
+      {
+        this.allowResendMail = response.statusCode === 291;
         this._uiService.setNewErrorStatus(response.message, undefined);
+      }
       
     }).catch(error => {
       this.proccessing = false;
+      console.log(error);
       this._uiService.setNewErrorStatus(error.message, error);
     });
+  }
+
+  resendVerificationMail():void
+  {
+    if(!this.email || !this.email.value)
+      return;
+
+    this.proccessing = true;
+    this._authService.resendVerificationMail(this.email?.value)
+    .subscribe(response=>{
+      this.proccessing = false;
+      if(response.statusCode === 200)
+        this._router.navigate(['../auth/verify']);
+      else
+        this._uiService.setNewErrorStatus(response.message, response);  
+    },error=>{
+      this.proccessing = false;
+      this._uiService.setNewErrorStatus
+      (error.error?.message || error.message, error);
+    })
   }
 }
